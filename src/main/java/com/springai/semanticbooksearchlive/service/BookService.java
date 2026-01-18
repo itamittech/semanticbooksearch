@@ -10,6 +10,9 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.ai.content.Media;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -121,19 +124,39 @@ public class BookService {
         }
     }
 
-    public String chat(String query) {
+    public String chat(String query, Resource imageResource) {
         // 1. Retrieve related documents
         List<Document> documents = vectorStore.similaritySearch(SearchRequest.builder().query(query).topK(3).build());
         String context = documents.stream().map(Document::getText).collect(Collectors.joining("\n"));
 
-        // 2. Chat with Advisor
+        // 2. Prepare User Message with Image if present
+        UserMessage message = new UserMessage(query);
+        if (imageResource != null) {
+            message.getMedia().add(new Media(MimeTypeUtils.IMAGE_JPEG, imageResource));
+        }
+
+        // 3. Chat with Advisor
         return chatClient.prompt()
                 .system(s -> s.text(systemPromptResource).param("context", context))
-                .user(query)
+                .messages(message)
                 .advisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .advisors(a -> a.param("chat_memory_conversation_id", "default"))
                 .call()
                 .content();
+    }
+
+    @Tool(description = "Searches the library for books matching the query. Returns a list of matching book titles and authors.")
+    public String searchLibrary(@ToolParam(description = "The title, author, or topic to search for") String query) {
+        CompareSearchResponse response = search(query, "All", 5);
+        List<SearchResult> results = response.semantic();
+
+        if (results.isEmpty()) {
+            return "No matching books found in the library.";
+        }
+
+        return results.stream()
+                .map(r -> r.book().title() + " by " + r.book().author())
+                .collect(Collectors.joining("\n"));
     }
 
     public CompareSearchResponse search(String query, String genre, int limit) {

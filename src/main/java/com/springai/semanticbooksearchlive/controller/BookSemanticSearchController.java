@@ -2,12 +2,14 @@ package com.springai.semanticbooksearchlive.controller;
 
 import com.springai.semanticbooksearchlive.model.Book;
 import com.springai.semanticbooksearchlive.model.CompareSearchResponse;
-import com.springai.semanticbooksearchlive.model.SearchResponse;
 import com.springai.semanticbooksearchlive.service.BookService;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -41,9 +43,14 @@ public class BookSemanticSearchController {
                 return "Book added successfully";
         }
 
-        @PostMapping("/chat")
-        public String chat(@RequestBody Map<String, String> request) {
-                return bookService.chat(request.get("query"));
+        @PostMapping(value = "/chat", consumes = "multipart/form-data")
+        public String chat(@RequestParam("query") String query,
+                        @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+                Resource imageResource = null;
+                if (file != null && !file.isEmpty()) {
+                        imageResource = new ByteArrayResource(file.getBytes());
+                }
+                return bookService.chat(query, imageResource);
         }
 
         @GetMapping("/search/compare")

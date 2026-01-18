@@ -6,7 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const genreSelect = document.getElementById('genreSelect');
     const semanticResultsContainer = document.getElementById('semanticResults');
+
     const keywordResultsContainer = document.getElementById('keywordResults');
+    const imageInput = document.getElementById('imageInput');
+    const scanningOverlay = document.getElementById('scanningOverlay');
 
     // Modal Elements
     const showAddBookModalBtn = document.getElementById('showAddBookModal');
@@ -21,6 +24,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize
     loadGenres();
+
+    // Chat Image Input Listeners
+    const chatImageInput = document.getElementById('chatImageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const fileNameDisplay = document.getElementById('fileName');
+    const clearImageBtn = document.getElementById('clearImage');
+
+    chatImageInput.addEventListener('change', () => {
+        if (chatImageInput.files.length > 0) {
+            fileNameDisplay.textContent = chatImageInput.files[0].name;
+            imagePreview.style.display = 'block';
+        } else {
+            imagePreview.style.display = 'none';
+        }
+    });
+
+    clearImageBtn.addEventListener('click', () => {
+        chatImageInput.value = '';
+        imagePreview.style.display = 'none';
+    });
 
     // --- Event Listeners ---
 
@@ -55,6 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Search
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(); });
     searchBtn.addEventListener('click', performSearch);
     searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(); });
 
@@ -182,30 +207,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function sendMessage() {
         const query = chatInput.value.trim();
-        if (!query) return;
+        const file = chatImageInput.files[0];
+
+        if (!query && !file) return;
 
         // Add User Message
-        addMessage(query, 'user');
+        let userMsgText = query;
+        if (file) {
+            userMsgText += ` [Attached: ${file.name}]`;
+        }
+        addMessage(userMsgText, 'user');
+
         chatInput.value = '';
+        chatImageInput.value = '';
+        imagePreview.style.display = 'none';
         chatBtn.disabled = true;
 
         // Add Placeholder AI Message
         const loadingMsg = addMessage('Thinking...', 'ai');
 
         try {
+            const formData = new FormData();
+            formData.append('query', query || "Describe this image."); // Fallback if only image sent
+            if (file) {
+                formData.append('file', file);
+            }
+
             const response = await fetch('/api/books/chat', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ query: query })
+                body: formData // No Content-Type header; browser sets it with boundary
             });
 
             if (response.ok) {
                 const answer = await response.text();
-                loadingMsg.textContent = answer;
+                // Markdown support removed for simplicity/safety unless library added
+                loadingMsg.innerHTML = answer.replace(/\n/g, '<br>');
             } else {
                 loadingMsg.textContent = 'Sorry, something went wrong.';
             }
         } catch (error) {
+            console.error(error);
             loadingMsg.textContent = 'Network error.';
         } finally {
             chatBtn.disabled = false;
@@ -219,5 +260,74 @@ document.addEventListener('DOMContentLoaded', () => {
         chatHistory.appendChild(msgDiv);
         chatHistory.scrollTop = chatHistory.scrollHeight;
         return msgDiv;
+    }
+
+
+    async function handleImageUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        scanningOverlay.style.display = 'flex';
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch('/api/books/search/image', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+
+                // Clear and Show Results
+                // Note: Visual Search currently only returns Semantic Results list in our simplified API
+                // We will populate 'Semantic Results' column with them.
+                renderResults(data.results, semanticResultsContainer);
+                keywordResultsContainer.innerHTML = '<p><em>Keyword search not applicable for images.</em></p>';
+
+                // Add Header with Identified Text
+                const header = document.createElement('div');
+                header.innerHTML = `
+                    <div style="background:#f0f9ff; padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid #bae6fd;">
+                        <strong>Vision Analysis:</strong> "${data.identifiedText}"
+                    </div>
+                `;
+                semanticResultsContainer.prepend(header);
+
+                // Smart Fallback: If no results, offer to ADD
+                if (!data.results || data.results.length === 0) {
+                    const noResultDiv = document.createElement('div');
+                    noResultDiv.className = 'pre-fill-msg';
+                    // Use backend suggestion or fallback
+                    const suggestionText = data.suggestion || "This book is missing from your library.";
+
+                    noResultDiv.innerHTML = `
+                            <p><strong>${data.identifiedTitle}</strong> by ${data.identifiedAuthor} (Identified)</p>
+                            <p>${suggestionText}</p>
+                            <button class="btn-add-found">Add to Collection</button>
+                        `;
+                    semanticResultsContainer.appendChild(noResultDiv);
+
+                    // Add Listener to this dynamic button
+                    noResultDiv.querySelector('.btn-add-found').addEventListener('click', () => {
+                        addBookModal.style.display = 'block';
+                        // Pre-fill form
+                        addBookForm.elements['title'].value = data.identifiedTitle !== 'Unknown' ? data.identifiedTitle : '';
+                        addBookForm.elements['author'].value = data.identifiedAuthor !== 'Unknown' ? data.identifiedAuthor : '';
+                        addBookForm.elements['summary'].value = `Scanned version of ${data.identifiedTitle}.`;
+                    });
+                }
+
+            } else {
+                alert('Image analysis failed.');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Network error.');
+        } finally {
+            scanningOverlay.style.display = 'none';
+            imageInput.value = ''; // Reset
+        }
     }
 });
