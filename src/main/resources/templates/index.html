@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Book Search - Spring AI</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Semantic Book Search</h1>
+            <p class="subtitle">Powered by Spring AI & Vector Embeddings</p>
+        </header>
+
+        <main>
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('search')">Search</button>
+                <button class="tab-btn" onclick="switchTab('chat')">Chat with Library (RAG)</button>
+            </div>
+
+            <!-- Search Tab -->
+            <div id="search" class="tab-content active">
+                <section class="card explanation">
+                    <h2>Vector Search Playground</h2>
+                    <div class="actions">
+                        <button id="loadBooksBtn" class="btn primary">Load Books from JSON</button>
+                        <button id="showAddBookModal" class="btn secondary outline">+ Add Custom Book</button>
+                        <span id="loadingStatus" class="status-message"></span>
+                    </div>
+                </section>
+
+                <section class="card search-section">
+                    <div class="search-box">
+                        <input type="text" id="searchInput"
+                            placeholder="Search by meaning (e.g., 'books about time travel')">
+                        <select id="genreSelect">
+                            <option value="All">All Genres</option>
+                        </select>
+                        <button id="searchBtn" class="btn secondary">Search</button>
+                    </div>
+
+                    <div class="results-container">
+                        <div class="result-column">
+                            <h3>Semantic Results (Meaning)</h3>
+                            <p class="result-desc">Matches intent via Vectors.</p>
+                            <div id="semanticResults" class="results-list"></div>
+                        </div>
+                        <div class="result-column">
+                            <h3>Keyword Results (Exact)</h3>
+                            <p class="result-desc">Matches exact text.</p>
+                            <div id="keywordResults" class="results-list"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Chat Tab -->
+            <div id="chat" class="tab-content" style="display: none;">
+                <section class="card chat-section">
+                    <h2>Chat with your Library</h2>
+                    <p>Ask questions and the AI will answer using only the books in your collection.</p>
+                    <div class="chat-container">
+                        <div id="chatHistory" class="chat-history"></div>
+                        <div class="chat-input-box">
+                            <input type="text" id="chatInput"
+                                placeholder="Ask a question (e.g., 'What history books do you have?')">
+                            <button id="chatBtn" class="btn primary">Send</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Add Book Modal -->
+        <div id="addBookModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Add New Book</h2>
+                <form id="addBookForm">
+                    <input type="text" name="title" placeholder="Title" required>
+                    <input type="text" name="author" placeholder="Author" required>
+                    <textarea name="summary" placeholder="Summary/Description" required rows="3"></textarea>
+                    <input type="text" name="genre" placeholder="Genre" required>
+                    <input type="number" name="publicationYear" placeholder="Year" required>
+                    <button type="submit" class="btn primary">Add Book</button>
+                </form>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built with Spring AI, Thymeleaf, and Helper</p>
+        </footer>
+    </div>
+
+    <script th:src="@{/js/app.js}"></script>
+</body>
+
+</html>
