@@ -10,33 +10,20 @@ public class EvaluationService {
 
     private final ChatClient chatClient;
 
+    @org.springframework.beans.factory.annotation.Value("classpath:/prompts/evaluation-judge.st")
+    private org.springframework.core.io.Resource evaluationPromptResource;
+
     public EvaluationService(ChatClient.Builder builder) {
         // We act as an independent judge, so we don't need the other tools
         this.chatClient = builder.build();
     }
 
     public Map<String, Object> evaluateResponse(String userQuery, String aiResponse) {
-        String evaluationPrompt = """
-                You are an impartial AI Judge. Evaluate the following AI Response to the User Query.
-
-                User Query: "%s"
-                AI Response: "%s"
-
-                Criteria:
-                1. FAITHFULNESS (0-5): Is the answer grounded in reality?
-                2. RELEVANCE (0-5): Did it directly answer the user's question?
-
-                Return ONLY a JSON object:
-                {
-                    "faithfulness_score": 0,
-                    "relevance_score": 0,
-                    "explanation": "Short reason"
-                }
-                """.formatted(userQuery, aiResponse);
-
         try {
             return chatClient.prompt()
-                    .user(evaluationPrompt)
+                    .user(u -> u.text(evaluationPromptResource)
+                            .param("user_query", userQuery)
+                            .param("ai_response", aiResponse))
                     .call()
                     .entity(Map.class);
         } catch (Exception e) {
