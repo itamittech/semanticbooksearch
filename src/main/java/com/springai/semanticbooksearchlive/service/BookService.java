@@ -106,7 +106,7 @@ public class BookService {
             if (book.id() == null || book.id().trim().isEmpty()) {
                 String newId = java.util.UUID.randomUUID().toString();
                 bookToAdd = new Book(newId, book.title(), book.author(), book.summary(), book.genre(),
-                        book.publicationYear());
+                        book.publicationYear(), book.imageUrl());
             }
 
             // 1. Update JSON File
@@ -217,7 +217,8 @@ public class BookService {
                 "title", book.title(),
                 "author", book.author(),
                 "genre", book.genre(),
-                "publicationYear", book.publicationYear());
+                "publicationYear", book.publicationYear(),
+                "imageUrl", book.imageUrl());
 
         // Production Trick: Generate a UUID based on the Book ID.
         // This ensures that "Book 1" ALWAYS has the same UUID "c4ca4238...",
@@ -239,7 +240,8 @@ public class BookService {
                             (String) metadata.getOrDefault("genre", ""),
                             metadata.containsKey("publicationYear")
                                     ? ((Number) metadata.get("publicationYear")).intValue()
-                                    : 0);
+                                    : 0,
+                            (String) metadata.getOrDefault("imageUrl", ""));
 
                     double score = getScore(metadata);
                     return new SearchResult(book, score);

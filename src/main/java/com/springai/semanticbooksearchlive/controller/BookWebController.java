@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class BookWebController {
 
-    @GetMapping("/")
-    public String index() {
-        return "index";
+    @GetMapping(value = "/**/{path:[^\\.]*}")
+    public String forward() {
+        return "forward:/index.html";
     }
 }
