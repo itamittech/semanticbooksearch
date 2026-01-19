@@ -2,9 +2,13 @@
 import React, { useState, useRef } from 'react';
 import { Send, Image as ImageIcon, Loader2 } from 'lucide-react';
 
+import { InsightsPanel } from '../components/InsightsPanel';
+
 interface Message {
     role: 'user' | 'assistant';
     content: string;
+    queryContext?: string; // The user query that prompted this response
+    showInsights?: boolean;
 }
 
 export const ChatPage: React.FC = () => {
@@ -46,7 +50,7 @@ export const ChatPage: React.FC = () => {
 
             if (response.ok) {
                 const text = await response.text();
-                setMessages(prev => [...prev, { role: 'assistant', content: text }]);
+                setMessages(prev => [...prev, { role: 'assistant', content: text, queryContext: userMessage }]);
             } else {
                 setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error.' }]);
             }
@@ -66,12 +70,24 @@ export const ChatPage: React.FC = () => {
                 {messages.map((msg, idx) => (
                     <div key={idx} className={`message ${msg.role}`}>
                         {msg.role === 'assistant' && (
-                            <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0, fontSize: '14px' }}>
-                                🤖
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0, fontSize: '14px', cursor: 'pointer' }}
+                                    onClick={() => {
+                                        setMessages(prev => prev.map((m, i) => i === idx ? { ...m, showInsights: !m.showInsights } : m));
+                                    }}
+                                    title="Toggle AI Insights"
+                                >
+                                    {msg.showInsights ? '📊' : '🤖'}
+                                </div>
                             </div>
                         )}
-                        <div className="message-bubble">
-                            {msg.content}
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                            <div className="message-bubble">
+                                {msg.content}
+                            </div>
+                            {msg.showInsights && msg.queryContext && (
+                                <InsightsPanel userQuery={msg.queryContext} aiResponse={msg.content} />
+                            )}
                         </div>
                     </div>
                 ))}

@@ -25,6 +25,10 @@ This project utilizes **Advanced Agentic Patterns** wrapping powerful AI capabil
 4.  **Library Management**:
     *   **Add Books**: A dedicated interface to easily add new books to your semantic database.
 
+5.  **Real-time AI Verification (LLM-as-a-Judge)**:
+    *   **Evaluator AI**: A separate AI model acts as a judge, evaluating the main assistant's responses for Faithfulness and Relevance in real-time.
+    *   **Visual Insights**: Users can trigger an evaluation and view detailed scores and reasoning directly within the chat interface, promoting transparency.
+
 ## 🛠 Tech Stack
 
 *   **Frontend**:
@@ -58,26 +62,21 @@ docker-compose up -d
 
 The application is designed to serve the React frontend directly from Spring Boot. You have two options:
 
-#### Option A: Run Everything (Recommended)
-This builds the frontend and bundles it into the Spring Boot application.
+#### Option A: Build & Run (Production Mode - Recommended)
+The project is configured to build the full stack automatically using Maven.
 
-1.  **Build Frontend**:
+1.  **Build the Project**:
     ```bash
-    cd frontend
-    npm install
-    npm run build
+    ./mvnw clean package
     ```
-    *(The build script automatically copies artifacts to `src/main/resources/static`)*
+    *(This command will automatically install Node/NPM, build the React frontend, and package it into the JAR).*
 
-2.  **Run Backend**:
-    Return to the root directory and run the Spring Boot app:
+2.  **Run the App**:
     ```bash
-    cd ..
-    ./mvnw spring-boot:run
+    java -jar target/semanticbooksearchlive-0.0.1-SNAPSHOT.jar
     ```
 
-3.  **Access the App**:
-    Open [http://localhost:8080](http://localhost:8080).
+3.  **Access**: Open [http://localhost:8080](http://localhost:8080).
 
 #### Option B: Frontend Development Mode
 For rapid UI iteration, you can run the React dev server separately.
@@ -103,4 +102,6 @@ For rapid UI iteration, you can run the React dev server separately.
 
 *   **Single Page Application (SPA) Serving**: The backend is configured to forward non-API requests to `index.html`, allowing React Router to handle client-side navigation seamlessly.
 *   **Tool Calling**: The Chat Client is configured with functions (`searchLibrary`) that the LLM can invoke autonomously to query the database.
+*   **LLM-as-a-Judge**: A meta-evaluation pattern where one LLM critiques the output of another to ensure quality and relevance.
+*   **Prompt Engineering**: Specialized system prompts ensure the AI acts as a helpful Librarian and strictly adheres to facts.
 *   **Prompt Engineering**: Specialized system prompts ensure the AI acts as a helpful Librarian and strictly adheres to facts.

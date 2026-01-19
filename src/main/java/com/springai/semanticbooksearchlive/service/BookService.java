@@ -40,6 +40,7 @@ public class BookService {
     private final ChatClient chatClient;
     private final ObjectMapper objectMapper;
     private final ChatMemory chatMemory;
+    private final com.springai.semanticbooksearchlive.advisor.InsightAdvisor insightAdvisor;
     private static final String BOOKS_JSON_PATH = "src/main/resources/data/books.json";
 
     @Value("classpath:prompts/library-assistant.st")
@@ -47,9 +48,11 @@ public class BookService {
 
     public BookService(VectorStore vectorStore, ChatClient.Builder builder, ObjectMapper objectMapper) {
         this.vectorStore = vectorStore;
+        this.insightAdvisor = new com.springai.semanticbooksearchlive.advisor.InsightAdvisor();
         // Register 'this' bean as a tool provider
         this.chatClient = builder
                 .defaultTools(this)
+                .defaultAdvisors(this.insightAdvisor)
                 .build();
         this.objectMapper = objectMapper;
         this.chatMemory = MessageWindowChatMemory.builder()
