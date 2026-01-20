@@ -45,6 +45,10 @@ This project utilizes **Advanced Agentic Patterns** wrapping powerful AI capabil
     *   **Evaluator AI**: A separate AI model acts as a judge, evaluating the main assistant's responses for Faithfulness and Relevance in real-time.
     *   **Visual Insights**: Users can trigger an evaluation and view detailed scores and reasoning directly within the chat interface, promoting transparency.
 
+8.  **Talk to the Book (Deep RAG)**:
+    *   **Dedicated Persona**: Chat specifically with a book (e.g., "Alice in Wonderland"). The AI adopts the book's persona and restricts its knowledge to that book's content.
+    *   **Deep Context**: Uses a specialized `book_content_vector_store` optimized for storing thousands of chunks per book, ensuring high-fidelity answers.
+
 ## 🛠 Tech Stack
 
 *   **Frontend**:

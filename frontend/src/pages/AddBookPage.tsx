@@ -212,6 +212,35 @@ export const AddBookPage: React.FC = () => {
                                 {bulkLoading ? 'Loading...' : 'Load Defaults'}
                             </button>
                         </div>
+                        <div className="action-card">
+                            <div className="action-info">
+                                <Sparkles className="action-icon" size={24} />
+                                <div>
+                                    <h4>Deep RAG Demo</h4>
+                                    <p>Load "Alice in Wonderland" with full text content.</p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={async () => {
+                                    if (!confirm('Load "Alice in Wonderland" with full text content for Deep RAG?')) return;
+                                    setBulkLoading(true);
+                                    try {
+                                        const res = await fetch('/api/books/load-demo', { method: 'POST' });
+                                        if (res.ok) alert('Demo book loaded! Check the main page.');
+                                        else alert('Failed to load demo.');
+                                    } catch (e) {
+                                        console.error(e);
+                                        alert('Error loading demo.');
+                                    } finally {
+                                        setBulkLoading(false);
+                                    }
+                                }}
+                                disabled={bulkLoading}
+                                className="btn-secondary"
+                            >
+                                {bulkLoading ? 'Loading...' : 'Load Alice Demo'}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -398,6 +427,6 @@ export const AddBookPage: React.FC = () => {
                     .preview-card-wrapper { display: flex; justify-content: center; transform: none; }
                 }
             `}</style>
-        </div>
+        </div >
     );
 };
