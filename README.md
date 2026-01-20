@@ -24,9 +24,19 @@ This project utilizes **Advanced Agentic Patterns** wrapping powerful AI capabil
 
 4.  **Library Management**:
     *   **Add Books**: A dedicated interface to easily add new books to your semantic database.
+    *   **Bulk Loading**: One-click "Load Defaults" to populate the database with a curated list of classic books.
+
+5.  **Visual Knowledge Graph (The "AI Brain")**:
+    *   **Interactive Visualization**: A force-directed graph (2D) that visualizes your entire library as a universe of interconnected nodes.
+    *   **True Semantic Connections**: Links between books are drawn based on real **Cosine Similarity** of their vector embeddings (1536 dimensions), not just genres.
+    *   **Explorable**: Zoom, pan, and drag nodes to discover how the AI "clusters" concepts (e.g., sci-fi books near philosophy books).
+    *   **Custom Physics**: Built from scratch using SVG and React physics, featuring auto-clustering and dynamic visuals.
 
 
-5.  **Hybrid Search (Vector + Keyword Fusion)**:
+    *   **Evaluator AI**: A separate AI model acts as a judge, evaluating the main assistant's responses for Faithfulness and Relevance in real-time.
+    *   **Visual Insights**: Users can trigger an evaluation and view detailed scores and reasoning directly within the chat interface, promoting transparency.
+
+7.  **Hybrid Search (Vector + Keyword Fusion)**:
     *   **Educational Lab**: A dedicated "Hybrid Search" tab that visually decomposes the search process.
     *   **Rank Fusion (RRF)**: Demonstrates how combining Semantic Search (vector) with Keyword Search (text) yields superior results using Reciprocal Rank Fusion.
     *   **Side-by-Side Comparison**: Users can see "What the AI found" vs "What the DB found" and the final fused result.
@@ -112,3 +122,4 @@ For rapid UI iteration, you can run the React dev server separately.
 *   **LLM-as-a-Judge**: A meta-evaluation pattern where one LLM critiques the output of another to ensure quality and relevance.
 *   **Hybrid Search & RRF**: A pattern merging "fuzzy" vector results with "precise" full-text results to cover both conceptual and specific user queries.
 *   **Prompt Engineering**: Specialized system prompts ensure the AI acts as a helpful Librarian and strictly adheres to facts.
+*   **Vector Visualization**: Techniques to map high-dimensional embeddings to 2D space (using similarity thresholds) for human-readable exploration.
