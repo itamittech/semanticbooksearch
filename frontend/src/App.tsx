@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { SearchPage } from './pages/SearchPage';
 import { ChatPage } from './pages/ChatPage';
 import { AddBookPage } from './pages/AddBookPage';
+import { HybridSearchPage } from './pages/HybridSearchPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<SearchPage />} />
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/add" element={<AddBookPage />} />
+          <Route path="/hybrid-search" element={<HybridSearchPage />} />
         </Routes>
       </div>
     </Router>

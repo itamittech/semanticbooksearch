@@ -1,9 +1,8 @@
 package com.springai.semanticbooksearchlive.controller;
 
+import com.springai.semanticbooksearchlive.model.EvaluationResult;
 import com.springai.semanticbooksearchlive.service.EvaluationService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/chat")
@@ -19,7 +18,7 @@ public class ChatController {
     }
 
     @PostMapping("/evaluate")
-    public Map<String, Object> evaluate(@RequestBody EvaluationRequest request) {
+    public EvaluationResult evaluate(@RequestBody EvaluationRequest request) {
         return evaluationService.evaluateResponse(request.userQuery(), request.aiResponse());
     }
 }

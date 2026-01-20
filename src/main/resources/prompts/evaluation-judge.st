@@ -23,10 +23,5 @@ Evaluate the AI response based on the following specific criteria:
    - 5: Directly and comprehensively answers the specific question asked.
 
 **Output Format**:
-Provide your output strictly as a JSON object with the following structure. Do not output markdown code blocks.
-
-{
-    "faithfulness_score": <int>,
-    "relevance_score": <int>,
-    "explanation": "<Concise explanation of the scores, max 30 words>"
-}
+Please provide your evaluation results strictly following the format below:
+{format}

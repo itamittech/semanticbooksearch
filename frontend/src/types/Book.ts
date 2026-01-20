@@ -8,3 +8,14 @@ export interface Book {
     publicationYear: number;
     imageUrl?: string;
 }
+
+export interface SearchResult {
+    book: Book;
+    score: number;
+}
+
+export interface HybridSearchResponse {
+    vectorResults: SearchResult[];
+    keywordResults: SearchResult[];
+    hybridResults: SearchResult[];
+}

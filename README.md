@@ -25,7 +25,13 @@ This project utilizes **Advanced Agentic Patterns** wrapping powerful AI capabil
 4.  **Library Management**:
     *   **Add Books**: A dedicated interface to easily add new books to your semantic database.
 
-5.  **Real-time AI Verification (LLM-as-a-Judge)**:
+
+5.  **Hybrid Search (Vector + Keyword Fusion)**:
+    *   **Educational Lab**: A dedicated "Hybrid Search" tab that visually decomposes the search process.
+    *   **Rank Fusion (RRF)**: Demonstrates how combining Semantic Search (vector) with Keyword Search (text) yields superior results using Reciprocal Rank Fusion.
+    *   **Side-by-Side Comparison**: Users can see "What the AI found" vs "What the DB found" and the final fused result.
+
+6.  **Real-time AI Verification (LLM-as-a-Judge)**:
     *   **Evaluator AI**: A separate AI model acts as a judge, evaluating the main assistant's responses for Faithfulness and Relevance in real-time.
     *   **Visual Insights**: Users can trigger an evaluation and view detailed scores and reasoning directly within the chat interface, promoting transparency.
 
@@ -92,16 +98,17 @@ For rapid UI iteration, you can run the React dev server separately.
 
 *   `frontend/`: The React application source.
     *   `src/components`: UI building blocks (Navbar, BookCard).
-    *   `src/pages`: Main views (Search, Chat, AddBook).
+    *   `src/pages`: Main views (Search, Chat, AddBook, HybridSearch).
     *   `src/index.css`: The "Soul" of the styling (Leanpub-inspired variables).
 *   `src/main/java`: The Spring Boot backend.
-    *   `controller/BookWebController.java`: Serves the React SPA (Handling client-side routing).
-    *   `service/BookService.java`: Core RAG and Vector logic.
+    *   `controller/HybridSearchController.java`: Dedicated endpoint for the Hybrid Search module.
+    *   `service/HybridSearchService.java`: Orchestrates Vector + Keyword search fusion.
+    *   `util/RankFusionUtils.java`: Custom implementation of Reciprocal Rank Fusion (RRF).
 
 ## 💡 Key Design Patterns implemented
 
 *   **Single Page Application (SPA) Serving**: The backend is configured to forward non-API requests to `index.html`, allowing React Router to handle client-side navigation seamlessly.
 *   **Tool Calling**: The Chat Client is configured with functions (`searchLibrary`) that the LLM can invoke autonomously to query the database.
 *   **LLM-as-a-Judge**: A meta-evaluation pattern where one LLM critiques the output of another to ensure quality and relevance.
-*   **Prompt Engineering**: Specialized system prompts ensure the AI acts as a helpful Librarian and strictly adheres to facts.
+*   **Hybrid Search & RRF**: A pattern merging "fuzzy" vector results with "precise" full-text results to cover both conceptual and specific user queries.
 *   **Prompt Engineering**: Specialized system prompts ensure the AI acts as a helpful Librarian and strictly adheres to facts.

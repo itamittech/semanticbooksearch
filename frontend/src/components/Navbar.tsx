@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, MessageCircle, PlusCircle } from 'lucide-react';
+import { BookOpen, MessageCircle, PlusCircle, GitMerge } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
     const location = useLocation();
@@ -24,6 +24,10 @@ export const Navbar: React.FC = () => {
                     <Link to="/add" className={`nav-link ${isActive('/add')}`}>
                         <PlusCircle size={18} />
                         Add Book
+                    </Link>
+                    <Link to="/hybrid-search" className={`nav-link ${isActive('/hybrid-search')}`}>
+                        <GitMerge size={18} />
+                        Hybrid Search
                     </Link>
                 </div>
             </div>

@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -121,9 +122,46 @@ public class BookService {
             // 2. Add to Vector Store
             Document document = mapBookToDocument(bookToAdd);
             vectorStore.add(List.of(document));
+
+            // 3. Ensure local cover image exists (Generate/Download if missing)
+            ensureCoverImageExists(bookToAdd.imageUrl(), bookToAdd.title());
+
             return "Book '" + bookToAdd.title() + "' added to library successfully.";
         } catch (IOException e) {
             throw new RuntimeException("Failed to add book", e);
+        }
+    }
+
+    private void ensureCoverImageExists(String imageUrl, String title) {
+        if (imageUrl == null || !imageUrl.startsWith("/images/books/")) {
+            return;
+        }
+
+        try {
+            // Construct target file path. relative to project root in dev environment
+            File imageFile = new File("frontend/public" + imageUrl);
+
+            if (!imageFile.exists()) {
+                if (imageFile.getParentFile() != null) {
+                    imageFile.getParentFile().mkdirs();
+                }
+
+                String placeholderUrl = "https://placehold.co/400x600?text="
+                        + java.net.URLEncoder.encode(title, java.nio.charset.StandardCharsets.UTF_8);
+
+                // Use a proper User-Agent to avoid 403 on some networks, though placehold.co is
+                // usually lenient
+                java.net.URLConnection connection = new java.net.URI(placeholderUrl).toURL().openConnection();
+                connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+                try (java.io.InputStream in = connection.getInputStream()) {
+                    java.nio.file.Files.copy(in, imageFile.toPath());
+                }
+            }
+        } catch (Exception e) {
+            // Log warning but do not fail the add operation
+            System.err.println(
+                    "Warning: Failed to generate local cover image for: " + title + ". Error: " + e.getMessage());
         }
     }
 
@@ -215,13 +253,13 @@ public class BookService {
     private Document mapBookToDocument(Book book) {
         String content = "Title: " + book.title() + ", Author: " + book.author()
                 + ", Description: " + book.summary();
-        Map<String, Object> metadata = Map.of(
-                "id", book.id(),
-                "title", book.title(),
-                "author", book.author(),
-                "genre", book.genre(),
-                "publicationYear", book.publicationYear(),
-                "imageUrl", book.imageUrl());
+        Map<String, Object> metadata = new HashMap<>();
+        metadata.put("id", book.id());
+        metadata.put("title", book.title() != null ? book.title() : "");
+        metadata.put("author", book.author() != null ? book.author() : "");
+        metadata.put("genre", book.genre() != null ? book.genre() : "");
+        metadata.put("publicationYear", book.publicationYear());
+        metadata.put("imageUrl", book.imageUrl() != null ? book.imageUrl() : "");
 
         // Production Trick: Generate a UUID based on the Book ID.
         // This ensures that "Book 1" ALWAYS has the same UUID "c4ca4238...",
