@@ -1,6 +1,7 @@
-package com.springai.semanticbooksearchlive.controller;
+package com.springai.semanticbooksearchlive.controller.book;
 
-import com.springai.semanticbooksearchlive.service.BookChatService;
+import com.springai.semanticbooksearchlive.service.book.BookChatService;
+import com.springai.semanticbooksearchlive.service.book.BookService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -10,10 +11,10 @@ import java.util.Map;
 public class BookChatController {
 
     private final BookChatService bookChatService;
-    private final com.springai.semanticbooksearchlive.service.BookService bookService;
+    private final BookService bookService;
 
     public BookChatController(BookChatService bookChatService,
-            com.springai.semanticbooksearchlive.service.BookService bookService) {
+            BookService bookService) {
         this.bookChatService = bookChatService;
         this.bookService = bookService;
     }

@@ -1,10 +1,10 @@
-package com.springai.semanticbooksearchlive.controller;
+package com.springai.semanticbooksearchlive.controller.study;
 
 import com.springai.semanticbooksearchlive.model.Course;
 import com.springai.semanticbooksearchlive.model.StudyMaterial;
-import com.springai.semanticbooksearchlive.service.CourseService;
-import com.springai.semanticbooksearchlive.service.StudyMaterialService;
-import com.springai.semanticbooksearchlive.service.TeacherService;
+import com.springai.semanticbooksearchlive.service.study.CourseService;
+import com.springai.semanticbooksearchlive.service.study.StudyMaterialService;
+import com.springai.semanticbooksearchlive.service.study.TeacherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

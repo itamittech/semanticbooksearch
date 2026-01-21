@@ -1,4 +1,4 @@
-package com.springai.semanticbooksearchlive.repository;
+package com.springai.semanticbooksearchlive.repository.study;
 
 import com.springai.semanticbooksearchlive.model.Course;
 import org.springframework.jdbc.core.simple.JdbcClient;

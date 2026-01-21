@@ -1,6 +1,6 @@
-package com.springai.semanticbooksearchlive.service;
+package com.springai.semanticbooksearchlive.service.book;
 
-import com.springai.semanticbooksearchlive.repository.BookContentRepository;
+import com.springai.semanticbooksearchlive.repository.book.BookContentRepository;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;

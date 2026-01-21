@@ -1,8 +1,8 @@
-package com.springai.semanticbooksearchlive.controller;
+package com.springai.semanticbooksearchlive.controller.book;
 
 import com.springai.semanticbooksearchlive.model.Book;
 import com.springai.semanticbooksearchlive.model.CompareSearchResponse;
-import com.springai.semanticbooksearchlive.service.BookService;
+import com.springai.semanticbooksearchlive.service.book.BookService;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;

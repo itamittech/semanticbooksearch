@@ -1,9 +1,9 @@
-package com.springai.semanticbooksearchlive.service;
+package com.springai.semanticbooksearchlive.service.search;
 
 import com.springai.semanticbooksearchlive.model.Book;
 import com.springai.semanticbooksearchlive.model.HybridSearchResponse;
 import com.springai.semanticbooksearchlive.model.SearchResult;
-import com.springai.semanticbooksearchlive.repository.KeywordSearchRepository;
+import com.springai.semanticbooksearchlive.repository.search.KeywordSearchRepository;
 import com.springai.semanticbooksearchlive.util.RankFusionUtils;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;

@@ -1,7 +1,7 @@
-package com.springai.semanticbooksearchlive.service;
+package com.springai.semanticbooksearchlive.service.graph;
 
 import com.springai.semanticbooksearchlive.model.GraphData;
-import com.springai.semanticbooksearchlive.repository.KeywordSearchRepository;
+import com.springai.semanticbooksearchlive.repository.search.KeywordSearchRepository;
 import org.springframework.ai.document.Document;
 import org.springframework.stereotype.Service;
 

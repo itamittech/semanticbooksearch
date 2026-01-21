@@ -1,7 +1,7 @@
-package com.springai.semanticbooksearchlive.service;
+package com.springai.semanticbooksearchlive.service.study;
 
 import com.springai.semanticbooksearchlive.model.Course;
-import com.springai.semanticbooksearchlive.repository.CourseRepository;
+import com.springai.semanticbooksearchlive.repository.study.CourseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

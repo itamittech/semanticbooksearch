@@ -1,60 +1,19 @@
 # Semantic Book Search with Spring AI (React Edition)
 
-This project demonstrates the power of **Semantic Search** and **Retrieval Augmented Generation (RAG)** using **Spring AI**, **Vector Embeddings**, and **PGVector**, served through a **Premium, Modern React UI**.
-
-Unlike traditional keyword search, semantic search understands the *meaning* and *intent* behind a query.
+**Semantic Search** & **RAG** powered by **Spring AI**, **PGVector**, and a **Premium React UI**.
 
 ## 🚀 Key Features
 
-This project utilizes **Advanced Agentic Patterns** wrapping powerful AI capabilities in a consumer-grade application:
-
-1.  **Premium User Experience**:
-    *   **Modern React Frontend**: Built with Vite and TypeScript for performance and type safety.
-    *   **Leanpub-Inspired Design**: A clean, professional aesthetic featuring a dark header, floating cards, and a focused layout.
-    *   **Responsive & Dynamic**: Smooth transitions, loading states, and interactive feedback.
-
-2.  **Unified Multi-Modal Chat (Agentic AI)**:
-    *   **Visual Search**: Upload a book cover directly in the chat window. The AI visualizes it, identifies the book, and autonomously verifies its presence in your library.
-    *   **Context-Aware**: Smartly switches between visual analysis and text-based RAG depending on user input.
-    *   **Zero Hallucinations**: Strictly guardrailed to only discuss books in your collection using tool-based verification.
-
-3.  **Semantic Search & Discovery**:
-    *   **Meaning-Based Search**: Find books by concept (e.g., "books about overcoming failure") rather than just keywords.
-    *   **Visual Results**: Search results are displayed as rich cards with cover images, authors, and summaries.
-
-4.  **Library Management**:
-    *   **Add Books**: A dedicated interface to easily add new books to your semantic database.
-    *   **Bulk Loading**: One-click "Load Defaults" to populate the database with a curated list of classic books.
-
-5.  **Visual Knowledge Graph (The "AI Brain")**:
-    *   **Interactive Visualization**: A force-directed graph (2D) that visualizes your entire library as a universe of interconnected nodes.
-    *   **True Semantic Connections**: Links between books are drawn based on real **Cosine Similarity** of their vector embeddings (1536 dimensions), not just genres.
-    *   **Explorable**: Zoom, pan, and drag nodes to discover how the AI "clusters" concepts (e.g., sci-fi books near philosophy books).
-    *   **Custom Physics**: Built from scratch using SVG and React physics, featuring auto-clustering and dynamic visuals.
-
-
-    *   **Evaluator AI**: A separate AI model acts as a judge, evaluating the main assistant's responses for Faithfulness and Relevance in real-time.
-    *   **Visual Insights**: Users can trigger an evaluation and view detailed scores and reasoning directly within the chat interface, promoting transparency.
-
-7.  **Hybrid Search (Vector + Keyword Fusion)**:
-    *   **Educational Lab**: A dedicated "Hybrid Search" tab that visually decomposes the search process.
-    *   **Rank Fusion (RRF)**: Demonstrates how combining Semantic Search (vector) with Keyword Search (text) yields superior results using Reciprocal Rank Fusion.
-    *   **Side-by-Side Comparison**: Users can see "What the AI found" vs "What the DB found" and the final fused result.
-
-6.  **Real-time AI Verification (LLM-as-a-Judge)**:
-    *   **Evaluator AI**: A separate AI model acts as a judge, evaluating the main assistant's responses for Faithfulness and Relevance in real-time.
-    *   **Visual Insights**: Users can trigger an evaluation and view detailed scores and reasoning directly within the chat interface, promoting transparency.
-
-8.  **Talk to the Book (Deep RAG)**:
-    *   **Dedicated Persona**: Chat specifically with a book (e.g., "Alice in Wonderland"). The AI adopts the book's persona and restricts its knowledge to that book's content.
-    *   **Deep Context**: Uses a specialized `book_content_vector_store` optimized for storing thousands of chunks per book, ensuring high-fidelity answers.
-
-9.  **AI Study Room (Educational Platform)**:
-    *   **Course Management**: Create courses and organize study materials (PDFs, PPTs, DOCs) in a dedicated dashboard with multiple file upload support (up to 100MB).
-    *   **AI Teacher Persona**: A dedicated AI tutor grounded *strictly* in your uploaded course materials. It will refuse to answer questions outside the syllabus.
-    *   **Smart Flashcards**: Automatically generates a deck of flashcards based on your course content with a realistic, skeuomorphic "flip" UI.
-    *   **Adaptive Quizzes**: Generates instant 5-question multiple-choice quizzes to test your knowledge, providing immediate grading and feedback.
-    *   **Document Parsing**: Powered by Apache Tika to extract text from a wide variety of document formats transparently.
+1.  **Semantic Search & Hybrid Retrieval**: Find books by meaning, not just keywords, using vector embeddings. Includes **Hybrid Search** (Vector + Keyword + RRF) for maximum accuracy.
+2.  **Unified Multi-Modal Chat**:
+    *   **Visual Search**: Upload book covers to identify and find them in your library.
+    *   **Agentic Verification**: AI autonomously tools to verify book availability.
+    *   **Book Personas**: Chat with specific books (e.g., "Alice in Wonderland") using deep RAG context.
+3.  **Premium UI**: A "Leanpub-inspired" React interface with dark themes, glassmorphism, and smooth transitions.
+4.  **Visual Knowledge Graph**: Interactive 2D force-directed graph visualizing semantic connections between books.
+5.  **AI Study Room**: Upload course materials (PDF/DOCX), generate flashcards, take quizzes, and chat with an AI Tutor grounded in your syllabus.
+6.  **The Great Debate**: "Intellectual Colosseum" arena where the AI simulates debates between any two uploaded documents (PDF/TXT) using sliding-window memory.
+7.  **Evaluator AI**: Real-time "LLM-as-a-Judge" evaluates answer quality and faithfulness.
 
 10. **The Great Debate (Standalone Arena)**:
     *   **"Intellectual Colosseum" UI**: A premium, game-like interface with neon visuals, dedicated avatars, and animated "VS" badges.

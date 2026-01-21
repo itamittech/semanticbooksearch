@@ -1,8 +1,8 @@
-package com.springai.semanticbooksearchlive.service;
+package com.springai.semanticbooksearchlive.service.study;
 
 import com.springai.semanticbooksearchlive.model.StudyMaterial;
-import com.springai.semanticbooksearchlive.repository.StudyMaterialRepository;
-import com.springai.semanticbooksearchlive.repository.StudyMaterialVectorRepository;
+import com.springai.semanticbooksearchlive.repository.study.StudyMaterialRepository;
+import com.springai.semanticbooksearchlive.repository.study.StudyMaterialVectorRepository;
 import org.apache.tika.Tika;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;

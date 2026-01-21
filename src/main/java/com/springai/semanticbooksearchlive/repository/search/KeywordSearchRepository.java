@@ -1,4 +1,4 @@
-package com.springai.semanticbooksearchlive.repository;
+package com.springai.semanticbooksearchlive.repository.search;
 
 import org.springframework.ai.document.Document;
 import org.springframework.jdbc.core.simple.JdbcClient;

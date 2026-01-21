@@ -1,4 +1,4 @@
-package com.springai.semanticbooksearchlive.service;
+package com.springai.semanticbooksearchlive.service.book;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +19,11 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -108,7 +113,7 @@ public class BookService {
             // Fix: Ensure Book has an ID if missing (common when adding via Chatbot)
             Book bookToAdd = book;
             if (book.id() == null || book.id().trim().isEmpty()) {
-                String newId = java.util.UUID.randomUUID().toString();
+                String newId = UUID.randomUUID().toString();
                 bookToAdd = new Book(newId, book.title(), book.author(), book.summary(), book.genre(),
                         book.publicationYear(), book.imageUrl());
             }
@@ -147,15 +152,15 @@ public class BookService {
                 }
 
                 String placeholderUrl = "https://placehold.co/400x600?text="
-                        + java.net.URLEncoder.encode(title, java.nio.charset.StandardCharsets.UTF_8);
+                        + URLEncoder.encode(title, StandardCharsets.UTF_8);
 
                 // Use a proper User-Agent to avoid 403 on some networks, though placehold.co is
                 // usually lenient
-                java.net.URLConnection connection = new java.net.URI(placeholderUrl).toURL().openConnection();
+                java.net.URLConnection connection = new URI(placeholderUrl).toURL().openConnection();
                 connection.setRequestProperty("User-Agent", "Mozilla/5.0");
 
                 try (java.io.InputStream in = connection.getInputStream()) {
-                    java.nio.file.Files.copy(in, imageFile.toPath());
+                    Files.copy(in, imageFile.toPath());
                 }
             }
         } catch (Exception e) {

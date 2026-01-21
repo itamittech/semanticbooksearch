@@ -1,7 +1,7 @@
-package com.springai.semanticbooksearchlive.controller;
+package com.springai.semanticbooksearchlive.controller.graph;
 
 import com.springai.semanticbooksearchlive.model.GraphData;
-import com.springai.semanticbooksearchlive.service.KnowledgeGraphService;
+import com.springai.semanticbooksearchlive.service.graph.KnowledgeGraphService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
