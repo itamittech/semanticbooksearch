@@ -56,6 +56,13 @@ This project utilizes **Advanced Agentic Patterns** wrapping powerful AI capabil
     *   **Adaptive Quizzes**: Generates instant 5-question multiple-choice quizzes to test your knowledge, providing immediate grading and feedback.
     *   **Document Parsing**: Powered by Apache Tika to extract text from a wide variety of document formats transparently.
 
+10. **The Great Debate (Standalone Arena)**:
+    *   **"Intellectual Colosseum" UI**: A premium, game-like interface with neon visuals, dedicated avatars, and animated "VS" badges.
+    *   **Any-File Support**: Upload any two documents (PDF, TXT, DOCX) directly to the arena.
+    *   **Context-Aware Debater**: The AI automatically parses both files, generates tailored personas, and conducts a 6-turn debate using RAG to cite specific arguments from the uploaded texts.
+    *   **Sliding Window Logic**: Implements a sliding context window to manage token limits while maintaining debate continuity.
+    *   **Temporary Storage**: Uses a dedicated, ephemeral vector store session that keeps your main library clean.
+
 ## 🛠 Tech Stack
 
 *   **Frontend**:
@@ -124,7 +131,10 @@ For rapid UI iteration, you can run the React dev server separately.
 *   `src/main/java`: The Spring Boot backend.
     *   `controller/HybridSearchController.java`: Dedicated endpoint for the Hybrid Search module.
     *   `service/HybridSearchService.java`: Orchestrates Vector + Keyword search fusion.
+    *   `service/HybridSearchService.java`: Orchestrates Vector + Keyword search fusion.
     *   `util/RankFusionUtils.java`: Custom implementation of Reciprocal Rank Fusion (RRF).
+    *   `controller/StandaloneDebateController.java`: Manages the debate API and turn-based logic.
+    *   `service/debate/DebateOrchestratorService.java`: The core "referee" that manages prompts, context windows, and persona switching.
 
 ## 💡 Key Design Patterns implemented
 

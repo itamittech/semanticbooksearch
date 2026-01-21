@@ -55,3 +55,14 @@ CREATE TABLE IF NOT EXISTS study_materials (
 );
 
 
+
+-- STANDALONE DEBATE FEATURE --
+-- Temporary table for ad-hoc file uploads
+CREATE TABLE IF NOT EXISTS debate_vector_store (
+	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	content text,
+	metadata json, -- Must contain 'session_id' and 'file_label'
+	embedding vector(1536)
+);
+
+CREATE INDEX IF NOT EXISTS idx_debate_vector_store_embedding ON debate_vector_store USING HNSW (embedding vector_cosine_ops);

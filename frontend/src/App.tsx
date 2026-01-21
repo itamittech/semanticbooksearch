@@ -9,6 +9,8 @@ import { KnowledgeGraphPage } from './pages/KnowledgeGraphPage';
 import { StudyRoomPage } from './pages/StudyRoomPage';
 import { CourseViewPage } from './pages/CourseViewPage';
 
+import { DebateArena } from './pages/DebateArena';
+
 function App() {
   return (
     <Router>
@@ -22,6 +24,7 @@ function App() {
           <Route path="/knowledge-graph" element={<KnowledgeGraphPage />} />
           <Route path="/study-room" element={<StudyRoomPage />} />
           <Route path="/study-room/course/:id" element={<CourseViewPage />} />
+          <Route path="/debate" element={<DebateArena />} />
         </Routes>
       </div>
     </Router>

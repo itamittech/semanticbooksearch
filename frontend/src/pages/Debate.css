@@ -1,0 +1,304 @@
+/* Debate.css */
+.debate-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 90vh;
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.debate-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.debate-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+}
+
+.debate-header p {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+/* Arena Setup */
+.arena-setup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  perspective: 1000px;
+}
+
+.upload-slot {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-slot::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: 0.5s;
+}
+
+.upload-slot:hover::before {
+  transform: translateX(100%);
+}
+
+.upload-slot:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.upload-slot.ready {
+  background: rgba(76, 175, 80, 0.1);
+  border-color: #4caf50;
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.2);
+}
+
+.slot-header h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ccc;
+}
+
+.vs-badge {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #FF4444;
+  text-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+  animation: pulse 2s infinite;
+  z-index: 10;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+    text-shadow: 0 0 40px rgba(255, 68, 68, 0.8);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Control Panel */
+.control-panel {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.control-panel input {
+  flex: 1;
+  padding: 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  font-size: 1.1rem;
+  transition: border-color 0.2s;
+}
+
+.control-panel input:focus {
+  outline: none;
+  border-color: #FF6B6B;
+}
+
+.start-btn,
+.next-turn-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0 2rem;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF4444 100%);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+}
+
+.start-btn:hover,
+.next-turn-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 68, 68, 0.5);
+}
+
+.start-btn:disabled {
+  background: #333;
+  color: #666;
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.next-turn-btn {
+  background: linear-gradient(135deg, #4481eb 0%, #04befe 100%);
+  box-shadow: 0 4px 15px rgba(4, 190, 254, 0.3);
+}
+
+/* Chat Transcript */
+.debate-transcript {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2.5rem;
+  min-height: 500px;
+  max-height: 700px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+/* Custom Scrollbar */
+.debate-transcript::-webkit-scrollbar {
+  width: 8px;
+}
+
+.debate-transcript::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.debate-transcript::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.message-bubble {
+  display: flex;
+  gap: 1.5rem;
+  max-width: 85%;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-bubble.left {
+  align-self: flex-start;
+}
+
+.message-bubble.right {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.message-bubble .avatar {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #333 0%, #222 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #888;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.message-bubble.left .avatar {
+  color: #FF6B6B;
+  border-color: rgba(255, 107, 107, 0.3);
+}
+
+.message-bubble.right .avatar {
+  color: #4481eb;
+  border-color: rgba(68, 129, 235, 0.3);
+}
+
+.message-bubble .content {
+  padding: 1.5rem;
+  border-radius: 16px;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  position: relative;
+}
+
+.message-bubble.left .content {
+  background: linear-gradient(145deg, #2a2a2a 0%, #222 100%);
+  border-radius: 4px 20px 20px 20px;
+  border-left: 3px solid #FF6B6B;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.message-bubble.right .content {
+  background: linear-gradient(145deg, #222 0%, #1a1a1a 100%);
+  border-radius: 20px 4px 20px 20px;
+  border-right: 3px solid #4481eb;
+  box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.message-bubble strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+.loading-indicator {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: 2rem;
+}
