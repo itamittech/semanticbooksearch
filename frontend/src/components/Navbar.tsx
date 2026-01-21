@@ -33,6 +33,10 @@ export const Navbar: React.FC = () => {
                         <Share2 size={18} />
                         Visualize
                     </Link>
+                    <Link to="/study-room" className={`nav-link ${isActive('/study-room')}`}>
+                        <span style={{ fontSize: '1.2rem' }}>🎓</span>
+                        Study Room
+                    </Link>
                 </div>
             </div>
         </nav>

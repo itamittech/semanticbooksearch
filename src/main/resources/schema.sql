@@ -26,3 +26,32 @@ CREATE TABLE IF NOT EXISTS book_content_vector_store (
 );
 
 CREATE INDEX IF NOT EXISTS idx_book_content_vector_store_embedding ON book_content_vector_store USING HNSW (embedding vector_cosine_ops);
+
+-- STUDY ROOM FEATURE --
+-- Courses table
+CREATE TABLE IF NOT EXISTS courses (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    name text NOT NULL,
+    description text
+);
+
+-- Separate vector store for study materials (strictly scoped by course)
+CREATE TABLE IF NOT EXISTS study_material_vector_store (
+	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	content text,
+	metadata json,
+	embedding vector(1536)
+);
+
+CREATE INDEX IF NOT EXISTS idx_study_material_vector_store_embedding ON study_material_vector_store USING HNSW (embedding vector_cosine_ops);
+
+-- Study Material Metadata Table (for listing files in a course)
+CREATE TABLE IF NOT EXISTS study_materials (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    course_id uuid NOT NULL REFERENCES courses(id),
+    filename text NOT NULL,
+    type text NOT NULL,
+    upload_date timestamp DEFAULT CURRENT_TIMESTAMP
+);
+
+
