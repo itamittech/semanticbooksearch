@@ -49,6 +49,13 @@ This project utilizes **Advanced Agentic Patterns** wrapping powerful AI capabil
     *   **Dedicated Persona**: Chat specifically with a book (e.g., "Alice in Wonderland"). The AI adopts the book's persona and restricts its knowledge to that book's content.
     *   **Deep Context**: Uses a specialized `book_content_vector_store` optimized for storing thousands of chunks per book, ensuring high-fidelity answers.
 
+9.  **AI Study Room (Educational Platform)**:
+    *   **Course Management**: Create courses and organize study materials (PDFs, PPTs, DOCs) in a dedicated dashboard with multiple file upload support (up to 100MB).
+    *   **AI Teacher Persona**: A dedicated AI tutor grounded *strictly* in your uploaded course materials. It will refuse to answer questions outside the syllabus.
+    *   **Smart Flashcards**: Automatically generates a deck of flashcards based on your course content with a realistic, skeuomorphic "flip" UI.
+    *   **Adaptive Quizzes**: Generates instant 5-question multiple-choice quizzes to test your knowledge, providing immediate grading and feedback.
+    *   **Document Parsing**: Powered by Apache Tika to extract text from a wide variety of document formats transparently.
+
 ## 🛠 Tech Stack
 
 *   **Frontend**:
