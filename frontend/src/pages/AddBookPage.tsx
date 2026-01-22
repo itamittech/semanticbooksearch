@@ -81,7 +81,8 @@ export const AddBookPage: React.FC = () => {
         genre: formData.genre || 'Genre',
         summary: formData.summary || 'A brief summary of the book will appear here as you type...',
         publicationYear: formData.publicationYear || 2024,
-        imageUrl: formData.imageUrl
+        imageUrl: formData.imageUrl,
+        hasContent: false
     };
 
     return (

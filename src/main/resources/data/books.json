@@ -1,1 +1,335 @@
-[{"id":"1","title":"The Martian Chronicles","author":"Ray Bradbury","summary":"A collection of interconnected stories about humanity's colonization of Mars, exploring themes of isolation, nostalgia, and the consequences of human expansion into space. Chronicles the transformation of the red planet and the fate of its original inhabitants.","genre":"Science Fiction","publicationYear":1950,"imageUrl":"https://placehold.co/400x600?text=The%20Martian%20Chronicles"},{"id":"2","title":"Neuromancer","author":"William Gibson","summary":"A groundbreaking cyberpunk novel following a washed-up computer hacker hired for one last job in a dystopian future dominated by artificial intelligence and mega-corporations. Explores virtual reality, consciousness, and the merger of human and machine.","genre":"Science Fiction","publicationYear":1984,"imageUrl":"/images/books/neuromancer.jpg"},{"id":"3","title":"The Left Hand of Darkness","author":"Ursula K. Le Guin","summary":"An envoy from Earth visits a frozen planet where inhabitants can change their gender, exploring themes of sexuality, politics, and what it means to be human. A profound meditation on identity and cultural differences.","genre":"Science Fiction","publicationYear":1969,"imageUrl":"https://placehold.co/400x600?text=The%20Left%20Hand%20of%20Darkness"},{"id":"4","title":"Sapiens: A Brief History of Humankind","author":"Yuval Noah Harari","summary":"A sweeping narrative of human history from the Stone Age to the modern era, examining how Homo sapiens came to dominate the world through cognitive revolution, agricultural revolution, and scientific revolution. Explores the impact of myths, money, and empires.","genre":"History","publicationYear":2011,"imageUrl":"/images/books/sapiens-a-brief-history-of-humankind.jpg"},{"id":"5","title":"The Guns of August","author":"Barbara Tuchman","summary":"A detailed account of the first month of World War I, analyzing the political miscalculations and military strategies that led to one of history's deadliest conflicts. Chronicles the decisions of leaders and the experiences of soldiers.","genre":"History","publicationYear":1962,"imageUrl":"/images/books/the-guns-of-august.jpg"},{"id":"6","title":"SPQR: A History of Ancient Rome","author":"Mary Beard","summary":"A comprehensive examination of ancient Roman civilization, from its mythical founding to the height of its empire. Explores Roman politics, society, culture, and the lives of both emperors and ordinary citizens.","genre":"History","publicationYear":2015,"imageUrl":"/images/books/spqr-a-history-of-ancient-rome.jpg"},{"id":"7","title":"A Brief History of Time","author":"Stephen Hawking","summary":"An accessible exploration of cosmology, black holes, and the nature of time and space. Discusses the Big Bang theory, quantum mechanics, and the search for a unified theory of physics that explains the universe.","genre":"Science","publicationYear":1988,"imageUrl":"/images/books/a-brief-history-of-time.jpg"},{"id":"8","title":"The Selfish Gene","author":"Richard Dawkins","summary":"A revolutionary perspective on evolution, arguing that genes, not organisms, are the fundamental units of natural selection. Introduces the concept of memes and explores how genetic self-interest shapes behavior and society.","genre":"Science","publicationYear":1976,"imageUrl":"/images/books/the-selfish-gene.jpg"},{"id":"9","title":"The Code Breaker","author":"Walter Isaacson","summary":"The story of CRISPR gene-editing technology and Jennifer Doudna's groundbreaking work that enables scientists to edit DNA. Explores the ethical implications of rewriting the code of life and the future of genetic engineering.","genre":"Science","publicationYear":2021,"imageUrl":"/images/books/the-code-breaker.jpg"},{"id":"10","title":"One Hundred Years of Solitude","author":"Gabriel García Márquez","summary":"A multi-generational saga of the Buendía family in the fictional town of Macondo, blending magical realism with themes of love, power, and the cyclical nature of history. A masterpiece of Latin American literature.","genre":"Fiction","publicationYear":1967,"imageUrl":"/images/books/one-hundred-years-of-solitude.jpg"},{"id":"11","title":"The Great Gatsby","author":"F. Scott Fitzgerald","summary":"A tragic love story set in the Jazz Age, exploring themes of wealth, ambition, and the American Dream through the mysterious millionaire Jay Gatsby and his obsession with the beautiful Daisy Buchanan.","genre":"Fiction","publicationYear":1925,"imageUrl":"/images/books/the-great-gatsby.jpg"},{"id":"12","title":"Beloved","author":"Toni Morrison","summary":"A haunting tale of a former slave haunted by the ghost of her dead daughter, exploring the psychological trauma of slavery and the struggle for identity and freedom in post-Civil War America.","genre":"Fiction","publicationYear":1987,"imageUrl":"/images/books/beloved.jpg"},{"id":"13","title":"Thinking, Fast and Slow","author":"Daniel Kahneman","summary":"A Nobel Prize winner's exploration of the two systems that drive human thinking: the fast, intuitive system and the slow, deliberate system. Examines cognitive biases, decision-making, and how we can make better choices.","genre":"Psychology","publicationYear":2011,"imageUrl":"/images/books/thinking-fast-and-slow.jpg"},{"id":"14","title":"Atomic Habits","author":"James Clear","summary":"A practical guide to building good habits and breaking bad ones through tiny changes that compound over time. Explains the science of habit formation and provides strategies for personal transformation.","genre":"Self-Help","publicationYear":2018,"imageUrl":"/images/books/atomic-habits.jpg"},{"id":"15","title":"Man's Search for Meaning","author":"Viktor E. Frankl","summary":"A psychiatrist's memoir of survival in Nazi concentration camps and his development of logotherapy, a philosophy centered on finding meaning in life even in the most brutal circumstances. A profound meditation on human resilience.","genre":"Psychology","publicationYear":1946,"imageUrl":"/images/books/mans-search-for-meaning.jpg"},{"id":"16","title":"Dune","author":"Frank Herbert","summary":"Set on the desert planet Arrakis, Dune is the story of the boy Paul Atreides, heir to a noble family tasked with ruling an inhospitable world where the only thing of value is the 'spice' melange. A mix of adventure and mysticism, environmentalism and politics.","genre":"Science Fiction","publicationYear":1965,"imageUrl":"/images/books/dune.jpg"},{"id":"17","title":"Project Hail Mary","author":"Andy Weir","summary":"Ryland Grace is the sole survivor on a desperate, last-chance mission—and if he fails, humanity and the earth itself will perish. But right now, he doesn't know that. He can't even remember his own name, let alone the nature of his assignment or how to complete it.","genre":"Science Fiction","publicationYear":2021,"imageUrl":"/images/books/project-hail-mary.jpg"},{"id":"18","title":"Dark Matter","author":"Blake Crouch","summary":"Jason Dessen is walking home one night when he is kidnapped, knocked unconscious, and wakes up strapped to a gurney, surrounded by strangers in hazmat suits. In this world he's not just a college physics professor, but a celebrated genius who achieved the impossible. Which world is real?","genre":"Science Fiction","publicationYear":2016,"imageUrl":"/images/books/dark-matter.jpg"},{"id":"19","title":"Clean Code","author":"Robert C. Martin","summary":"Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. This book presents a handbook of agile software craftsmanship.","genre":"Technology","publicationYear":2008,"imageUrl":"/images/books/clean-code.jpg"},{"id":"20","title":"The Pragmatic Programmer","author":"Andrew Hunt and David Thomas","summary":"A guide to the best practices and potential pitfalls of software development. It covers topics ranging from personal responsibility and career development to architectural techniques for keeping your code flexible and easy to adapt and reuse.","genre":"Technology","publicationYear":1999,"imageUrl":"/images/books/the-pragmatic-programmer.jpg"},{"id":"21","title":"Design Patterns","author":"Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides","summary":"Capturing a wealth of experience about the design of object-oriented software, four top-notch designers present a catalog of simple and succinct solutions to commonly occurring design problems. Previously undocumented, these 23 patterns allow designers to create more flexible, elegant, and ultimately reusable designs.","genre":"Technology","publicationYear":1994,"imageUrl":"/images/books/design-patterns.jpg"},{"id":"1768720358247","title":"Learn AI","author":"Amit Mishra","summary":"Learning AI concept in Spring","genre":"Coding","publicationYear":2026,"imageUrl":"/images/books/learn-ai.jpg"},{"id":"1","title":"Coding Book","author":"John Doe","summary":"An introductory guide to coding for beginners, covering fundamental concepts of programming languages, algorithms, and best practices in software development.","genre":"Technology","publicationYear":2024,"imageUrl":"/images/books/coding-book.jpg"},{"id":"1","title":"Artificial Intelligence: A Guide to Intelligent Systems","author":"Michael Negnevitsky","summary":"This book provides a comprehensive introduction to the field of artificial intelligence, covering various techniques and applications. It emphasizes practical implementation and real-world examples, making complex concepts accessible to readers.","genre":"Technology","publicationYear":2024,"imageUrl":"/images/books/artificial-intelligence-a-guide-to-intelligent-systems.jpg"},{"id":"space-001","title":"The Cosmos Unveiled","author":"Dr. Jane Stellar","summary":"An in-depth exploration of the universe, discussing the origins of stars, planets, and galaxies, as well as the latest discoveries in space exploration and the potential for extraterrestrial life.","genre":"Science","publicationYear":2024,"imageUrl":"/images/books/the-cosmos-unveiled.jpg"},{"id":"power-001","title":"The Power of Habit","author":"Charles Duhigg","summary":"This book explores the science behind why habits exist and how they can be changed. It provides insights into how habits work and offers strategies for transforming your life by altering your habits.","genre":"Self-Help","publicationYear":2024,"imageUrl":"/images/books/the-power-of-habit.jpg"},{"id":"b529aa7e-e97a-4e2f-900c-97764361c830","title":"Yoga Philosophy: The Path to Inner Peace","author":"Ananda Gupta","summary":"This book explores the profound teachings of yoga as a philosophical system, delving into the ancient texts and practical applications of yoga in achieving mental clarity, emotional balance, and spiritual growth. It serves as a guide for both beginners and advanced practitioners seeking to deepen their understanding of yoga's transformative power.","genre":"Philosophy","publicationYear":2024,"imageUrl":"/images/books/yoga-philosophy-the-path-to-inner-peace.jpg"},{"id":"c1ccfa0b-5c6f-4f14-9cd2-b7142b6e9a6d","title":"The Merck Manual of Diagnosis and Therapy","author":"Robert S. Porter","summary":"The Merck Manual is a comprehensive medical reference that provides information on a wide range of diseases, conditions, and treatments. It is an essential resource for healthcare professionals and students.","genre":"Medical Reference","publicationYear":2024,"imageUrl":"/images/books/the-merck-manual-of-diagnosis-and-therapy.jpg"},{"id":"magical-art-2024","title":"The Art of Magic: A Comprehensive Guide to the Magical Arts","author":"Mystic Sage","summary":"This book serves as a comprehensive guide to the magical arts, exploring various practices, spells, and the history of magic. It provides insights into different magical traditions and offers practical advice for aspiring practitioners.","genre":"Fantasy/Occult","publicationYear":2024,"imageUrl":"/images/books/the-art-of-magic-a-comprehensive-guide-to-the-magical-arts.jpg"},{"id":"14b063d7-d347-429d-ac56-4c73a161093e","title":"140 Tips For Clean Code","author":"Petri K. Silén","summary":"A comprehensive guide offering 140 actionable tips for writing clean, maintainable code, emphasizing best practices in software development.","genre":"Programming","publicationYear":2024,"imageUrl":"/images/books/140-tips-for-clean-code.jpg"},{"id":"f04d4632-22f4-405f-8e78-55a49cfdddb3","title":"Build APIs You Won’t Hate","author":"Philip Sturgeon","summary":"Everyone and their dog wants an API, so you should probably learn how to build one.","genre":"Technology","publicationYear":2024,"imageUrl":"/images/books/build-apis-you-wont-hate.jpg"},{"id":"bf5af7d9-bf99-45f0-8b22-d47dd2c47287","title":"Learning Meditation and Hindu Mythology","author":"John Doe","summary":"This book offers a comprehensive guide to meditation techniques and explores the rich tapestry of Hindu mythology, providing insights into spiritual practices and stories.","genre":"Self-Help/Philosophy","publicationYear":2024,"imageUrl":"/images/books/learning-meditation-and-hindu-mythology.jpg"},{"id":"66cf3538-bbc5-4b90-a2c9-958d53c8be7e","title":"Naruto Shipuden","author":"Masashi Kishimoto","summary":"The story continues the adventures of Naruto Uzumaki as he seeks to become the strongest ninja and protect his village while facing new challenges and powerful enemies.","genre":"Manga","publicationYear":2024,"imageUrl":"/images/books/naruto-shipuden.jpg"},{"id":"219f3130-dcf3-45d3-850e-db73018e9990","title":"One Piece","author":"Eiichiro Oda","summary":"Follow the adventures of Monkey D. Luffy and his pirate crew as they search for the ultimate treasure known as the One Piece. Along their journey, they face powerful foes, uncover hidden secrets, and explore the vast seas of the Grand Line.","genre":"Adventure, Fantasy","publicationYear":2024,"imageUrl":"/images/books/one-piece.jpg"},{"id":"73718c25-d3a0-4a41-8278-86778b98ff70","title":"The Three-Body Problem","author":"Liu Cixin","summary":"A groundbreaking novel that explores the first contact between humanity and an alien civilization, delving into themes of physics, philosophy, and the future of humanity.","genre":"Science Fiction","publicationYear":2024,"imageUrl":"/images/books/the-three-body-problem.jpg"},{"id":"kumaoni-language-and-culture","title":"Kumaoni Language and Culture","author":"Ravi Joshi","summary":"An insightful exploration of the Kumaoni language, its structure, history, and cultural significance in the state of Uttarakhand.","genre":"Language Studies","publicationYear":2024,"imageUrl":"/images/books/kumaoni-language-and-culture.jpg"},{"id":"demo-alice","title":"Alice's Adventures in Wonderland","author":"Lewis Carroll","summary":"Alice's Adventures in Wonderland (Demo Book with Deep RAG enabled)","genre":"Fantasy","publicationYear":1865,"imageUrl":"https://placehold.co/400x600?text=Alice"}]
+[
+    {
+        "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+        "title": "The Martian Chronicles",
+        "author": "Ray Bradbury",
+        "summary": "A collection of interconnected stories about humanity's colonization of Mars, exploring themes of isolation, nostalgia, and the consequences of human expansion into space. Chronicles the transformation of the red planet and the fate of its original inhabitants.",
+        "genre": "Science Fiction",
+        "publicationYear": 1950,
+        "imageUrl": "https://placehold.co/400x600?text=The%20Martian%20Chronicles"
+    },
+    {
+        "id": "b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a12",
+        "title": "Neuromancer",
+        "author": "William Gibson",
+        "summary": "A groundbreaking cyberpunk novel following a washed-up computer hacker hired for one last job in a dystopian future dominated by artificial intelligence and mega-corporations. Explores virtual reality, consciousness, and the merger of human and machine.",
+        "genre": "Science Fiction",
+        "publicationYear": 1984,
+        "imageUrl": "/images/books/neuromancer.jpg"
+    },
+    {
+        "id": "c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a13",
+        "title": "The Left Hand of Darkness",
+        "author": "Ursula K. Le Guin",
+        "summary": "An envoy from Earth visits a frozen planet where inhabitants can change their gender, exploring themes of sexuality, politics, and what it means to be human. A profound meditation on identity and cultural differences.",
+        "genre": "Science Fiction",
+        "publicationYear": 1969,
+        "imageUrl": "https://placehold.co/400x600?text=The%20Left%20Hand%20of%20Darkness"
+    },
+    {
+        "id": "d3eebc99-9c0b-4ef8-bb6d-6bb9bd380a14",
+        "title": "Sapiens: A Brief History of Humankind",
+        "author": "Yuval Noah Harari",
+        "summary": "A sweeping narrative of human history from the Stone Age to the modern era, examining how Homo sapiens came to dominate the world through cognitive revolution, agricultural revolution, and scientific revolution. Explores the impact of myths, money, and empires.",
+        "genre": "History",
+        "publicationYear": 2011,
+        "imageUrl": "/images/books/sapiens-a-brief-history-of-humankind.jpg"
+    },
+    {
+        "id": "e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a15",
+        "title": "The Guns of August",
+        "author": "Barbara Tuchman",
+        "summary": "A detailed account of the first month of World War I, analyzing the political miscalculations and military strategies that led to one of history's deadliest conflicts. Chronicles the decisions of leaders and the experiences of soldiers.",
+        "genre": "History",
+        "publicationYear": 1962,
+        "imageUrl": "/images/books/the-guns-of-august.jpg"
+    },
+    {
+        "id": "f5eebc99-9c0b-4ef8-bb6d-6bb9bd380a16",
+        "title": "SPQR: A History of Ancient Rome",
+        "author": "Mary Beard",
+        "summary": "A comprehensive examination of ancient Roman civilization, from its mythical founding to the height of its empire. Explores Roman politics, society, culture, and the lives of both emperors and ordinary citizens.",
+        "genre": "History",
+        "publicationYear": 2015,
+        "imageUrl": "/images/books/spqr-a-history-of-ancient-rome.jpg"
+    },
+    {
+        "id": "a6eebc99-9c0b-4ef8-bb6d-6bb9bd380a17",
+        "title": "A Brief History of Time",
+        "author": "Stephen Hawking",
+        "summary": "An accessible exploration of cosmology, black holes, and the nature of time and space. Discusses the Big Bang theory, quantum mechanics, and the search for a unified theory of physics that explains the universe.",
+        "genre": "Science",
+        "publicationYear": 1988,
+        "imageUrl": "/images/books/a-brief-history-of-time.jpg"
+    },
+    {
+        "id": "b7eebc99-9c0b-4ef8-bb6d-6bb9bd380a18",
+        "title": "The Selfish Gene",
+        "author": "Richard Dawkins",
+        "summary": "A revolutionary perspective on evolution, arguing that genes, not organisms, are the fundamental units of natural selection. Introduces the concept of memes and explores how genetic self-interest shapes behavior and society.",
+        "genre": "Science",
+        "publicationYear": 1976,
+        "imageUrl": "/images/books/the-selfish-gene.jpg"
+    },
+    {
+        "id": "c8eebc99-9c0b-4ef8-bb6d-6bb9bd380a19",
+        "title": "The Code Breaker",
+        "author": "Walter Isaacson",
+        "summary": "The story of CRISPR gene-editing technology and Jennifer Doudna's groundbreaking work that enables scientists to edit DNA. Explores the ethical implications of rewriting the code of life and the future of genetic engineering.",
+        "genre": "Science",
+        "publicationYear": 2021,
+        "imageUrl": "/images/books/the-code-breaker.jpg"
+    },
+    {
+        "id": "d9eebc99-9c0b-4ef8-bb6d-6bb9bd380a20",
+        "title": "One Hundred Years of Solitude",
+        "author": "Gabriel García Márquez",
+        "summary": "A multi-generational saga of the Buendía family in the fictional town of Macondo, blending magical realism with themes of love, power, and the cyclical nature of history. A masterpiece of Latin American literature.",
+        "genre": "Fiction",
+        "publicationYear": 1967,
+        "imageUrl": "/images/books/one-hundred-years-of-solitude.jpg"
+    },
+    {
+        "id": "e0eebc99-9c0b-4ef8-bb6d-6bb9bd380a21",
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "summary": "A tragic love story set in the Jazz Age, exploring themes of wealth, ambition, and the American Dream through the mysterious millionaire Jay Gatsby and his obsession with the beautiful Daisy Buchanan.",
+        "genre": "Fiction",
+        "publicationYear": 1925,
+        "imageUrl": "/images/books/the-great-gatsby.jpg"
+    },
+    {
+        "id": "f1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22",
+        "title": "Beloved",
+        "author": "Toni Morrison",
+        "summary": "A haunting tale of a former slave haunted by the ghost of her dead daughter, exploring the psychological trauma of slavery and the struggle for identity and freedom in post-Civil War America.",
+        "genre": "Fiction",
+        "publicationYear": 1987,
+        "imageUrl": "/images/books/beloved.jpg"
+    },
+    {
+        "id": "a2eebc99-9c0b-4ef8-bb6d-6bb9bd380a23",
+        "title": "Thinking, Fast and Slow",
+        "author": "Daniel Kahneman",
+        "summary": "A Nobel Prize winner's exploration of the two systems that drive human thinking: the fast, intuitive system and the slow, deliberate system. Examines cognitive biases, decision-making, and how we can make better choices.",
+        "genre": "Psychology",
+        "publicationYear": 2011,
+        "imageUrl": "/images/books/thinking-fast-and-slow.jpg"
+    },
+    {
+        "id": "b3eebc99-9c0b-4ef8-bb6d-6bb9bd380a24",
+        "title": "Atomic Habits",
+        "author": "James Clear",
+        "summary": "A practical guide to building good habits and breaking bad ones through tiny changes that compound over time. Explains the science of habit formation and provides strategies for personal transformation.",
+        "genre": "Self-Help",
+        "publicationYear": 2018,
+        "imageUrl": "/images/books/atomic-habits.jpg"
+    },
+    {
+        "id": "c4eebc99-9c0b-4ef8-bb6d-6bb9bd380a25",
+        "title": "Man's Search for Meaning",
+        "author": "Viktor E. Frankl",
+        "summary": "A psychiatrist's memoir of survival in Nazi concentration camps and his development of logotherapy, a philosophy centered on finding meaning in life even in the most brutal circumstances. A profound meditation on human resilience.",
+        "genre": "Psychology",
+        "publicationYear": 1946,
+        "imageUrl": "/images/books/mans-search-for-meaning.jpg"
+    },
+    {
+        "id": "d5eebc99-9c0b-4ef8-bb6d-6bb9bd380a26",
+        "title": "Dune",
+        "author": "Frank Herbert",
+        "summary": "Set on the desert planet Arrakis, Dune is the story of the boy Paul Atreides, heir to a noble family tasked with ruling an inhospitable world where the only thing of value is the 'spice' melange. A mix of adventure and mysticism, environmentalism and politics.",
+        "genre": "Science Fiction",
+        "publicationYear": 1965,
+        "imageUrl": "/images/books/dune.jpg"
+    },
+    {
+        "id": "e6eebc99-9c0b-4ef8-bb6d-6bb9bd380a27",
+        "title": "Project Hail Mary",
+        "author": "Andy Weir",
+        "summary": "Ryland Grace is the sole survivor on a desperate, last-chance mission—and if he fails, humanity and the earth itself will perish. But right now, he doesn't know that. He can't even remember his own name, let alone the nature of his assignment or how to complete it.",
+        "genre": "Science Fiction",
+        "publicationYear": 2021,
+        "imageUrl": "/images/books/project-hail-mary.jpg"
+    },
+    {
+        "id": "f7eebc99-9c0b-4ef8-bb6d-6bb9bd380a28",
+        "title": "Dark Matter",
+        "author": "Blake Crouch",
+        "summary": "Jason Dessen is walking home one night when he is kidnapped, knocked unconscious, and wakes up strapped to a gurney, surrounded by strangers in hazmat suits. In this world he's not just a college physics professor, but a celebrated genius who achieved the impossible. Which world is real?",
+        "genre": "Science Fiction",
+        "publicationYear": 2016,
+        "imageUrl": "/images/books/dark-matter.jpg"
+    },
+    {
+        "id": "a8eebc99-9c0b-4ef8-bb6d-6bb9bd380a29",
+        "title": "Clean Code",
+        "author": "Robert C. Martin",
+        "summary": "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. This book presents a handbook of agile software craftsmanship.",
+        "genre": "Technology",
+        "publicationYear": 2008,
+        "imageUrl": "/images/books/clean-code.jpg"
+    },
+    {
+        "id": "b9eebc99-9c0b-4ef8-bb6d-6bb9bd380a30",
+        "title": "The Pragmatic Programmer",
+        "author": "Andrew Hunt and David Thomas",
+        "summary": "A guide to the best practices and potential pitfalls of software development. It covers topics ranging from personal responsibility and career development to architectural techniques for keeping your code flexible and easy to adapt and reuse.",
+        "genre": "Technology",
+        "publicationYear": 1999,
+        "imageUrl": "/images/books/the-pragmatic-programmer.jpg"
+    },
+    {
+        "id": "c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a31",
+        "title": "Design Patterns",
+        "author": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
+        "summary": "Capturing a wealth of experience about the design of object-oriented software, four top-notch designers present a catalog of simple and succinct solutions to commonly occurring design problems. Previously undocumented, these 23 patterns allow designers to create more flexible, elegant, and ultimately reusable designs.",
+        "genre": "Technology",
+        "publicationYear": 1994,
+        "imageUrl": "/images/books/design-patterns.jpg"
+    },
+    {
+        "id": "1768720358247",
+        "title": "Learn AI",
+        "author": "Amit Mishra",
+        "summary": "Learning AI concept in Spring",
+        "genre": "Coding",
+        "publicationYear": 2026,
+        "imageUrl": "/images/books/learn-ai.jpg"
+    },
+    {
+        "id": "d1eebc99-9c0b-4ef8-bb6d-6bb9bd380a32",
+        "title": "Coding Book",
+        "author": "John Doe",
+        "summary": "An introductory guide to coding for beginners, covering fundamental concepts of programming languages, algorithms, and best practices in software development.",
+        "genre": "Technology",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/coding-book.jpg"
+    },
+    {
+        "id": "e2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33",
+        "title": "Artificial Intelligence: A Guide to Intelligent Systems",
+        "author": "Michael Negnevitsky",
+        "summary": "This book provides a comprehensive introduction to the field of artificial intelligence, covering various techniques and applications. It emphasizes practical implementation and real-world examples, making complex concepts accessible to readers.",
+        "genre": "Technology",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/artificial-intelligence-a-guide-to-intelligent-systems.jpg"
+    },
+    {
+        "id": "space-001",
+        "title": "The Cosmos Unveiled",
+        "author": "Dr. Jane Stellar",
+        "summary": "An in-depth exploration of the universe, discussing the origins of stars, planets, and galaxies, as well as the latest discoveries in space exploration and the potential for extraterrestrial life.",
+        "genre": "Science",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/the-cosmos-unveiled.jpg"
+    },
+    {
+        "id": "power-001",
+        "title": "The Power of Habit",
+        "author": "Charles Duhigg",
+        "summary": "This book explores the science behind why habits exist and how they can be changed. It provides insights into how habits work and offers strategies for transforming your life by altering your habits.",
+        "genre": "Self-Help",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/the-power-of-habit.jpg"
+    },
+    {
+        "id": "b529aa7e-e97a-4e2f-900c-97764361c830",
+        "title": "Yoga Philosophy: The Path to Inner Peace",
+        "author": "Ananda Gupta",
+        "summary": "This book explores the profound teachings of yoga as a philosophical system, delving into the ancient texts and practical applications of yoga in achieving mental clarity, emotional balance, and spiritual growth. It serves as a guide for both beginners and advanced practitioners seeking to deepen their understanding of yoga's transformative power.",
+        "genre": "Philosophy",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/yoga-philosophy-the-path-to-inner-peace.jpg"
+    },
+    {
+        "id": "c1ccfa0b-5c6f-4f14-9cd2-b7142b6e9a6d",
+        "title": "The Merck Manual of Diagnosis and Therapy",
+        "author": "Robert S. Porter",
+        "summary": "The Merck Manual is a comprehensive medical reference that provides information on a wide range of diseases, conditions, and treatments. It is an essential resource for healthcare professionals and students.",
+        "genre": "Medical Reference",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/the-merck-manual-of-diagnosis-and-therapy.jpg"
+    },
+    {
+        "id": "magical-art-2024",
+        "title": "The Art of Magic: A Comprehensive Guide to the Magical Arts",
+        "author": "Mystic Sage",
+        "summary": "This book serves as a comprehensive guide to the magical arts, exploring various practices, spells, and the history of magic. It provides insights into different magical traditions and offers practical advice for aspiring practitioners.",
+        "genre": "Fantasy/Occult",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/the-art-of-magic-a-comprehensive-guide-to-the-magical-arts.jpg"
+    },
+    {
+        "id": "14b063d7-d347-429d-ac56-4c73a161093e",
+        "title": "140 Tips For Clean Code",
+        "author": "Petri K. Silén",
+        "summary": "A comprehensive guide offering 140 actionable tips for writing clean, maintainable code, emphasizing best practices in software development.",
+        "genre": "Programming",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/140-tips-for-clean-code.jpg"
+    },
+    {
+        "id": "f04d4632-22f4-405f-8e78-55a49cfdddb3",
+        "title": "Build APIs You Won’t Hate",
+        "author": "Philip Sturgeon",
+        "summary": "Everyone and their dog wants an API, so you should probably learn how to build one.",
+        "genre": "Technology",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/build-apis-you-wont-hate.jpg"
+    },
+    {
+        "id": "bf5af7d9-bf99-45f0-8b22-d47dd2c47287",
+        "title": "Learning Meditation and Hindu Mythology",
+        "author": "John Doe",
+        "summary": "This book offers a comprehensive guide to meditation techniques and explores the rich tapestry of Hindu mythology, providing insights into spiritual practices and stories.",
+        "genre": "Self-Help/Philosophy",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/learning-meditation-and-hindu-mythology.jpg"
+    },
+    {
+        "id": "66cf3538-bbc5-4b90-a2c9-958d53c8be7e",
+        "title": "Naruto Shipuden",
+        "author": "Masashi Kishimoto",
+        "summary": "The story continues the adventures of Naruto Uzumaki as he seeks to become the strongest ninja and protect his village while facing new challenges and powerful enemies.",
+        "genre": "Manga",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/naruto-shipuden.jpg"
+    },
+    {
+        "id": "219f3130-dcf3-45d3-850e-db73018e9990",
+        "title": "One Piece",
+        "author": "Eiichiro Oda",
+        "summary": "Follow the adventures of Monkey D. Luffy and his pirate crew as they search for the ultimate treasure known as the One Piece. Along their journey, they face powerful foes, uncover hidden secrets, and explore the vast seas of the Grand Line.",
+        "genre": "Adventure, Fantasy",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/one-piece.jpg"
+    },
+    {
+        "id": "73718c25-d3a0-4a41-8278-86778b98ff70",
+        "title": "The Three-Body Problem",
+        "author": "Liu Cixin",
+        "summary": "A groundbreaking novel that explores the first contact between humanity and an alien civilization, delving into themes of physics, philosophy, and the future of humanity.",
+        "genre": "Science Fiction",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/the-three-body-problem.jpg"
+    },
+    {
+        "id": "kumaoni-language-and-culture",
+        "title": "Kumaoni Language and Culture",
+        "author": "Ravi Joshi",
+        "summary": "An insightful exploration of the Kumaoni language, its structure, history, and cultural significance in the state of Uttarakhand.",
+        "genre": "Language Studies",
+        "publicationYear": 2024,
+        "imageUrl": "/images/books/kumaoni-language-and-culture.jpg"
+    },
+    {
+        "id": "demo-alice",
+        "title": "Alice's Adventures in Wonderland",
+        "author": "Lewis Carroll",
+        "summary": "Alice's Adventures in Wonderland (Demo Book with Deep RAG enabled)",
+        "genre": "Fantasy",
+        "publicationYear": 1865,
+        "imageUrl": "https://placehold.co/400x600?text=Alice"
+    }
+]

@@ -7,6 +7,7 @@ export interface Book {
     genre: string;
     publicationYear: number;
     imageUrl?: string;
+    hasContent: boolean;
 }
 
 export interface SearchResult {

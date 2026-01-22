@@ -2,8 +2,11 @@ package com.springai.semanticbooksearchlive.controller.book;
 
 import com.springai.semanticbooksearchlive.service.book.BookChatService;
 import com.springai.semanticbooksearchlive.service.book.BookService;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -28,6 +31,23 @@ public class BookChatController {
         return bookChatService.chat(id, title, message);
     }
 
+    @PostMapping("/{id}/upload")
+    public String uploadBookContent(
+            @PathVariable String id,
+            @RequestParam("file") MultipartFile file) {
+        try {
+            bookChatService.uploadBookContent(id, new ByteArrayResource(file.getBytes()));
+            return "Book content uploaded successfully.";
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload book content", e);
+        }
+    }
+
+    @PostMapping("/refresh-catalog")
+    public String refreshCatalog() {
+        return bookService.refreshBookCatalog();
+    }
+
     @PostMapping("/load-demo")
     public String loadDemoBook() {
         // Alice in Wonderland from Project Gutenberg
@@ -47,7 +67,8 @@ public class BookChatController {
                     "Alice's Adventures in Wonderland (Demo Book with Deep RAG enabled)",
                     "Fantasy",
                     1865,
-                    "https://placehold.co/400x600?text=Alice"));
+                    "https://placehold.co/400x600?text=Alice",
+                    true));
 
             return "Successfully loaded demo book: " + demoTitle;
         } catch (Exception e) {

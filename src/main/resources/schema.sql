@@ -1,9 +1,19 @@
-CREATE EXTENSION IF NOT EXISTS vector;
-CREATE EXTENSION IF NOT EXISTS hstore;
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+DROP TABLE IF EXISTS books CASCADE;
+CREATE TABLE IF NOT EXISTS books (
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+    title text NOT NULL,
+    author text,
+    summary text,
+    genre text,
+    publication_year int,
+    image_url text,
+    has_content boolean DEFAULT false
+);
+
+DROP TABLE IF EXISTS vector_store CASCADE;
 CREATE TABLE IF NOT EXISTS vector_store (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
 	content text,
 	metadata json,
 	embedding vector(1536)
@@ -18,8 +28,9 @@ CREATE INDEX IF NOT EXISTS idx_vector_store_content_search ON vector_store USING
 
 -- TALK TO BOOK FEATURE --
 -- Separate table for storing detailed book content chunks
+DROP TABLE IF EXISTS book_content_vector_store CASCADE;
 CREATE TABLE IF NOT EXISTS book_content_vector_store (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
 	content text,
 	metadata json,
 	embedding vector(1536)
@@ -29,15 +40,17 @@ CREATE INDEX IF NOT EXISTS idx_book_content_vector_store_embedding ON book_conte
 
 -- STUDY ROOM FEATURE --
 -- Courses table
+DROP TABLE IF EXISTS courses CASCADE;
 CREATE TABLE IF NOT EXISTS courses (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
     name text NOT NULL,
     description text
 );
 
 -- Separate vector store for study materials (strictly scoped by course)
+DROP TABLE IF EXISTS study_material_vector_store CASCADE;
 CREATE TABLE IF NOT EXISTS study_material_vector_store (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
 	content text,
 	metadata json,
 	embedding vector(1536)
@@ -46,8 +59,9 @@ CREATE TABLE IF NOT EXISTS study_material_vector_store (
 CREATE INDEX IF NOT EXISTS idx_study_material_vector_store_embedding ON study_material_vector_store USING HNSW (embedding vector_cosine_ops);
 
 -- Study Material Metadata Table (for listing files in a course)
+DROP TABLE IF EXISTS study_materials CASCADE;
 CREATE TABLE IF NOT EXISTS study_materials (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
     course_id uuid NOT NULL REFERENCES courses(id),
     filename text NOT NULL,
     type text NOT NULL,
@@ -58,11 +72,14 @@ CREATE TABLE IF NOT EXISTS study_materials (
 
 -- STANDALONE DEBATE FEATURE --
 -- Temporary table for ad-hoc file uploads
+DROP TABLE IF EXISTS debate_vector_store CASCADE;
 CREATE TABLE IF NOT EXISTS debate_vector_store (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
 	content text,
 	metadata json, -- Must contain 'session_id' and 'file_label'
 	embedding vector(1536)
 );
+
+
 
 CREATE INDEX IF NOT EXISTS idx_debate_vector_store_embedding ON debate_vector_store USING HNSW (embedding vector_cosine_ops);

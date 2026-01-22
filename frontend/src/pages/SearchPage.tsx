@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { type Book } from '../types/Book';
 import { BookCard } from '../components/BookCard';
-import { Search, Sparkles, BookOpen, Zap, ArrowRight } from 'lucide-react';
+import { Search, Sparkles, BookOpen, Zap, ArrowRight, RefreshCw } from 'lucide-react';
 
 export const SearchPage: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
     const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         fetchBooks();
@@ -24,6 +25,22 @@ export const SearchPage: React.FC = () => {
             console.error('Error fetching books:', error);
         } finally {
             setLoading(false);
+        }
+    };
+
+
+    const handleRefreshCatalog = async () => {
+        setRefreshing(true);
+        try {
+            const response = await fetch('/api/books/refresh-catalog', { method: 'POST' });
+            if (response.ok) {
+                // Reload books after refresh
+                fetchBooks();
+            }
+        } catch (error) {
+            console.error('Error refreshing catalog:', error);
+        } finally {
+            setRefreshing(false);
         }
     };
 
@@ -66,19 +83,23 @@ export const SearchPage: React.FC = () => {
                         Explore our library using natural language. Search by plot, character, emotion, or keyword.
                     </p>
 
-                    <form className="search-capsule" onSubmit={handleSearch}>
-                        <Search className="search-icon" size={20} />
-                        <input
-                            type="text"
-                            className="search-input"
-                            placeholder="Try 'books about space travel' or 'dystopian classics'..."
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                        />
-                        <button type="submit" className="search-btn" disabled={loading}>
-                            {loading ? 'Searching...' : <ArrowRight size={20} />}
-                        </button>
-                    </form>
+                    <div className="search-actions">
+                        <form className="search-capsule" onSubmit={handleSearch}>
+                            <Search className="search-icon" size={20} />
+                            <input
+                                type="text"
+                                className="search-input"
+                                placeholder="Try 'books about space travel' or 'dystopian classics'..."
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                            />
+                            <button type="submit" className="search-btn" disabled={loading}>
+                                {loading ? 'Searching...' : <ArrowRight size={20} />}
+                            </button>
+                        </form>
+
+
+                    </div>
 
                     <div className="features-grid">
                         <div className="feature-item">
@@ -101,7 +122,25 @@ export const SearchPage: React.FC = () => {
 
             <div className="results-section">
                 <div className="section-header">
-                    <h2>{query ? `Results for "${query}"` : 'Recently Added'}</h2>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                        <h2>{query ? `Results for "${query}"` : 'Recently Added'}</h2>
+                        <button
+                            onClick={handleRefreshCatalog}
+                            disabled={refreshing}
+                            title="Refresh catalog"
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                color: '#64748b',
+                                display: 'flex',
+                                alignItems: 'center'
+                            }}
+                        >
+                            <RefreshCw size={18} className={refreshing ? 'animate-spin' : ''} />
+                        </button>
+                    </div>
                     <span className="result-count">{books.length} books</span>
                 </div>
 
@@ -114,7 +153,7 @@ export const SearchPage: React.FC = () => {
                     <>
                         <div className="book-grid">
                             {books.map((book) => (
-                                <BookCard key={book.id} book={book} />
+                                <BookCard key={book.id} book={book} onBookUpdate={fetchBooks} />
                             ))}
                         </div>
 
@@ -238,7 +277,31 @@ export const SearchPage: React.FC = () => {
                 }
 
                 .search-btn:hover:not(:disabled) { background: #1d4ed8; transform: scale(1.05); }
+                .search-btn:hover:not(:disabled) { background: #1d4ed8; transform: scale(1.05); }
                 .search-btn:disabled { background: #e2e8f0; color: #94a3b8; }
+
+                .btn-refresh {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    padding: 0.75rem 1.25rem;
+                    background: white;
+                    border: 1px solid #cbd5e1;
+                    border-radius: 99px;
+                    color: #475569;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    height: 50px;
+                }
+
+                .btn-refresh:hover:not(:disabled) {
+                    border-color: #2563eb;
+                    color: #2563eb;
+                    background: #eff6ff;
+                }
+
+                .animate-spin { animation: spin 1s linear infinite; }
 
                 .features-grid {
                     display: flex;

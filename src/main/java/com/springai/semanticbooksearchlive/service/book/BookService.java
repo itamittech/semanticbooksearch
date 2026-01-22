@@ -1,15 +1,15 @@
 package com.springai.semanticbooksearchlive.service.book;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springai.semanticbooksearchlive.model.Book;
 import com.springai.semanticbooksearchlive.model.CompareSearchResponse;
 import com.springai.semanticbooksearchlive.model.SearchResult;
+import com.springai.semanticbooksearchlive.repository.BookRepository;
+import com.springai.semanticbooksearchlive.service.book.provider.BookProvider;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.ai.content.Media;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.util.MimeTypeUtils;
@@ -18,18 +18,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.UUID;
-import java.nio.file.Paths;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.ai.chat.memory.ChatMemory;
@@ -44,23 +42,25 @@ public class BookService {
 
     private final VectorStore vectorStore;
     private final ChatClient chatClient;
-    private final ObjectMapper objectMapper;
     private final ChatMemory chatMemory;
     private final com.springai.semanticbooksearchlive.advisor.InsightAdvisor insightAdvisor;
-    private static final String BOOKS_JSON_PATH = "src/main/resources/data/books.json";
+    private final BookRepository bookRepository;
+    private final List<BookProvider> bookProviders;
 
     @Value("classpath:prompts/library-assistant.st")
     private Resource systemPromptResource;
 
-    public BookService(VectorStore vectorStore, ChatClient.Builder builder, ObjectMapper objectMapper) {
+    public BookService(VectorStore vectorStore, ChatClient.Builder builder, BookRepository bookRepository,
+            List<BookProvider> bookProviders) {
         this.vectorStore = vectorStore;
+        this.bookRepository = bookRepository;
+        this.bookProviders = bookProviders;
         this.insightAdvisor = new com.springai.semanticbooksearchlive.advisor.InsightAdvisor();
         // Register 'this' bean as a tool provider
         this.chatClient = builder
                 .defaultTools(this)
                 .defaultAdvisors(this.insightAdvisor)
                 .build();
-        this.objectMapper = objectMapper;
         this.chatMemory = MessageWindowChatMemory.builder()
                 .chatMemoryRepository(new InMemoryChatMemoryRepository())
                 .maxMessages(100)
@@ -68,27 +68,42 @@ public class BookService {
     }
 
     public List<Book> getAllBooks() {
-        return loadBooksFromJson();
+        return bookRepository.findAll();
     }
 
     public String loadBooksToVectorStore() {
-        List<Book> books = loadBooksFromJson();
+        // Load initial books from DB
+        List<Book> books = bookRepository.findAll();
         List<Document> documents = books.stream()
                 .map(this::mapBookToDocument)
                 .collect(Collectors.toList());
 
-        // Production Best Practice: Idempotency via Deterministic IDs + DB Constraint
-        // We do NOT manually delete here. We rely on the DB to handle the
-        // upsert/conflict
-        // based on the PRIMARY KEY constraint on the 'id' column.
-
-        // 3. Add the fresh documents
         vectorStore.add(documents);
         return "Successfully loaded " + books.size() + " books into vector store (DB Constraint Idempotency)";
     }
 
+    public String refreshBookCatalog() {
+        int count = 0;
+        for (BookProvider provider : bookProviders) {
+            List<Book> newBooks = provider.fetchBooks();
+            for (Book book : newBooks) {
+                bookRepository.save(book);
+
+                // Also add to vector store if needed for search immediately
+                // However, logic says 'loadBooksToVectorStore' handles that.
+                // Let's add them incrementally here too for better UX.
+                Document doc = mapBookToDocument(book);
+                vectorStore.add(List.of(doc));
+
+                ensureCoverImageExists(book.imageUrl(), book.title());
+                count++;
+            }
+        }
+        return "Refreshed catalog with " + count + " new books from providers.";
+    }
+
     public Set<String> getGenres() {
-        return loadBooksFromJson().stream()
+        return bookRepository.findAll().stream()
                 .map(Book::genre)
                 .collect(Collectors.toSet());
     }
@@ -100,17 +115,12 @@ public class BookService {
     @Tool(description = "Adds a book to the library collection. Use this when the user explicitly confirms they want to add a book.")
     public String addBookToLibrary(@ToolParam(description = "The book object to add") Book book) {
         try {
-            List<Book> existingBooks = loadBooksFromJson();
+            // Check for duplicates in DB
+            // Assuming simplified check via repo save logic or optional lookup.
+            // For tool response, we might want to be explicit.
+            // But since save is idempotent-ish in our logic:
 
-            // Check for duplicates
-            boolean exists = existingBooks.stream()
-                    .anyMatch(b -> b.title().equalsIgnoreCase(book.title()));
-
-            if (exists) {
-                return "Book '" + book.title() + "' already exists in the library.";
-            }
-
-            // Fix: Ensure Book has an ID if missing (common when adding via Chatbot)
+            // Fix: Ensure Book has an ID if missing
             Book bookToAdd = book;
             if (book.id() == null || book.id().trim().isEmpty()) {
                 String newId = UUID.randomUUID().toString();
@@ -118,21 +128,18 @@ public class BookService {
                         book.publicationYear(), book.imageUrl());
             }
 
-            // 1. Update JSON File
-            List<Book> books = new ArrayList<>(existingBooks);
-            books.add(bookToAdd);
-            File file = Paths.get(BOOKS_JSON_PATH).toFile();
-            objectMapper.writeValue(file, books);
+            // 1. Save to DB
+            bookRepository.save(bookToAdd);
 
             // 2. Add to Vector Store
             Document document = mapBookToDocument(bookToAdd);
             vectorStore.add(List.of(document));
 
-            // 3. Ensure local cover image exists (Generate/Download if missing)
+            // 3. Ensure local cover image exists
             ensureCoverImageExists(bookToAdd.imageUrl(), bookToAdd.title());
 
             return "Book '" + bookToAdd.title() + "' added to library successfully.";
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Failed to add book", e);
         }
     }
@@ -143,7 +150,6 @@ public class BookService {
         }
 
         try {
-            // Construct target file path. relative to project root in dev environment
             File imageFile = new File("frontend/public" + imageUrl);
 
             if (!imageFile.exists()) {
@@ -154,8 +160,6 @@ public class BookService {
                 String placeholderUrl = "https://placehold.co/400x600?text="
                         + URLEncoder.encode(title, StandardCharsets.UTF_8);
 
-                // Use a proper User-Agent to avoid 403 on some networks, though placehold.co is
-                // usually lenient
                 java.net.URLConnection connection = new URI(placeholderUrl).toURL().openConnection();
                 connection.setRequestProperty("User-Agent", "Mozilla/5.0");
 
@@ -164,24 +168,20 @@ public class BookService {
                 }
             }
         } catch (Exception e) {
-            // Log warning but do not fail the add operation
             System.err.println(
                     "Warning: Failed to generate local cover image for: " + title + ". Error: " + e.getMessage());
         }
     }
 
     public String chat(String query, Resource imageResource) {
-        // 1. Retrieve related documents
         List<Document> documents = vectorStore.similaritySearch(SearchRequest.builder().query(query).topK(3).build());
         String context = documents.stream().map(Document::getText).collect(Collectors.joining("\n"));
 
-        // 2. Prepare User Message with Image if present
         UserMessage message = new UserMessage(query);
         if (imageResource != null) {
             message.getMedia().add(new Media(MimeTypeUtils.IMAGE_JPEG, imageResource));
         }
 
-        // 3. Chat with Advisor
         return chatClient.prompt()
                 .system(s -> s.text(systemPromptResource).param("context", context))
                 .messages(message)
@@ -219,7 +219,11 @@ public class BookService {
         List<SearchResult> semanticResults = constructSearchResult(documents);
 
         // 2. Keyword Search
-        List<Book> allBooks = loadBooksFromJson();
+        // Note: For now, fetching all books from DB for simple keyword search might be
+        // okay for small scale,
+        // but for larger DB, we should use SQL LIKE query in Repository.
+        // For strict compatibility with previous logic & small dataset, we fetch all.
+        List<Book> allBooks = bookRepository.findAll();
         List<SearchResult> keywordResults = allBooks.stream()
                 .filter(book -> {
                     boolean matchesQuery = book.title().toLowerCase().contains(query.toLowerCase()) ||
@@ -236,25 +240,6 @@ public class BookService {
         return new CompareSearchResponse(semanticResults, keywordResults);
     }
 
-    private List<Book> loadBooksFromJson() {
-        try {
-            // Fix: Read from the same file system path we write to, preventing
-            // 'split-brain' between src and target
-            File file = Paths.get(BOOKS_JSON_PATH).toFile();
-            if (file.exists()) {
-                return objectMapper.readValue(file, new TypeReference<List<Book>>() {
-                });
-            } else {
-                // Fallback to classpath if file doesn't exist (e.g. first run)
-                Resource resource = new ClassPathResource("data/books.json");
-                return objectMapper.readValue(resource.getInputStream(), new TypeReference<List<Book>>() {
-                });
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to load books from JSON", e);
-        }
-    }
-
     private Document mapBookToDocument(Book book) {
         String content = "Title: " + book.title() + ", Author: " + book.author()
                 + ", Description: " + book.summary();
@@ -266,11 +251,7 @@ public class BookService {
         metadata.put("publicationYear", book.publicationYear());
         metadata.put("imageUrl", book.imageUrl() != null ? book.imageUrl() : "");
 
-        // Production Trick: Generate a UUID based on the Book ID.
-        // This ensures that "Book 1" ALWAYS has the same UUID "c4ca4238...",
-        // preventing duplicates even across restarts or different sessions.
         String deterministicId = java.util.UUID.nameUUIDFromBytes(book.id().getBytes()).toString();
-
         return new Document(deterministicId, content, metadata);
     }
 
