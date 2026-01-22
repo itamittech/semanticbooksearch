@@ -1,4 +1,7 @@
 
+
+CREATE EXTENSION IF NOT EXISTS vector;
+
 DROP TABLE IF EXISTS books CASCADE;
 CREATE TABLE IF NOT EXISTS books (
     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -8,7 +11,9 @@ CREATE TABLE IF NOT EXISTS books (
     genre text,
     publication_year int,
     image_url text,
-    has_content boolean DEFAULT false
+    has_content boolean DEFAULT false,
+    table_of_contents text[],
+    text_url text
 );
 
 DROP TABLE IF EXISTS vector_store CASCADE;

@@ -19,16 +19,37 @@ public class BookRepository {
 
     public List<Book> findAll() {
         return jdbcClient.sql("SELECT * FROM books")
-                .query(Book.class)
+                .query(bookRowMapper)
                 .list();
     }
 
     public Optional<Book> findById(String id) {
         return jdbcClient.sql("SELECT * FROM books WHERE id = :id")
                 .param("id", UUID.fromString(id))
-                .query(Book.class)
+                .query(bookRowMapper)
                 .optional();
     }
+
+    private final org.springframework.jdbc.core.RowMapper<Book> bookRowMapper = (rs, rowNum) -> {
+        java.sql.Array tocArray = rs.getArray("table_of_contents");
+        List<String> toc = java.util.Collections.emptyList();
+        if (tocArray != null) {
+            String[] data = (String[]) tocArray.getArray();
+            toc = java.util.Arrays.asList(data);
+        }
+
+        return new Book(
+                rs.getString("id"),
+                rs.getString("title"),
+                rs.getString("author"),
+                rs.getString("summary"),
+                rs.getString("genre"),
+                rs.getInt("publication_year"),
+                rs.getString("image_url"),
+                rs.getBoolean("has_content"),
+                toc,
+                rs.getString("text_url"));
+    };
 
     public void save(Book book) {
         // Simple upsert based on title (for now) or insert if new
@@ -37,7 +58,7 @@ public class BookRepository {
 
         Optional<Book> existing = jdbcClient.sql("SELECT * FROM books WHERE title = :title")
                 .param("title", book.title())
-                .query(Book.class)
+                .query(bookRowMapper)
                 .optional();
 
         if (existing.isPresent()) {
@@ -49,7 +70,7 @@ public class BookRepository {
         UUID id = (book.id() == null || book.id().isEmpty()) ? UUID.randomUUID() : UUID.fromString(book.id());
 
         jdbcClient.sql(
-                "INSERT INTO books (id, title, author, summary, genre, publication_year, image_url, has_content) VALUES (:id, :title, :author, :summary, :genre, :publicationYear, :imageUrl, :hasContent)")
+                "INSERT INTO books (id, title, author, summary, genre, publication_year, image_url, has_content, table_of_contents, text_url) VALUES (:id, :title, :author, :summary, :genre, :publicationYear, :imageUrl, :hasContent, :tableOfContents, :textUrl)")
                 .param("id", id)
                 .param("title", book.title())
                 .param("author", book.author())
@@ -58,6 +79,9 @@ public class BookRepository {
                 .param("publicationYear", book.publicationYear())
                 .param("imageUrl", book.imageUrl())
                 .param("hasContent", false) // Default to false for new books
+                .param("tableOfContents",
+                        book.tableOfContents() != null ? book.tableOfContents().toArray(new String[0]) : new String[0])
+                .param("textUrl", book.textUrl())
                 .update();
     }
 

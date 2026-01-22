@@ -86,6 +86,16 @@ public class GutendexBookProvider implements BookProvider {
                 ? gBook.summaries.get(0)
                 : "Project Gutenberg Book";
 
+        String textUrl = null;
+        if (gBook.formats != null) {
+            if (gBook.formats.textUtf8 != null)
+                textUrl = gBook.formats.textUtf8;
+            else if (gBook.formats.textAscii != null)
+                textUrl = gBook.formats.textAscii;
+            else if (gBook.formats.textPlain != null)
+                textUrl = gBook.formats.textPlain;
+        }
+
         return new Book(
                 id,
                 title,
@@ -93,7 +103,10 @@ public class GutendexBookProvider implements BookProvider {
                 summary,
                 genre,
                 0, // Year often not easily available in list, defaults to 0
-                imageUrl);
+                imageUrl,
+                false,
+                Collections.emptyList(),
+                textUrl);
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -120,6 +133,12 @@ public class GutendexBookProvider implements BookProvider {
         public static class Formats {
             @JsonProperty("image/jpeg")
             public String image;
+            @JsonProperty("text/plain; charset=utf-8")
+            public String textUtf8;
+            @JsonProperty("text/plain; charset=us-ascii")
+            public String textAscii;
+            @JsonProperty("text/plain")
+            public String textPlain;
         }
     }
 }

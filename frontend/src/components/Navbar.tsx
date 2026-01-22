@@ -38,6 +38,10 @@ export const Navbar: React.FC = () => {
                         <Swords size={18} />
                         Debate Arena
                     </Link>
+                    <Link to="/curriculum" className={`nav-link ${isActive('/curriculum')}`}>
+                        <span style={{ fontSize: '1.2rem' }}>📜</span>
+                        Curriculum
+                    </Link>
                 </div>
             </div>
         </nav>

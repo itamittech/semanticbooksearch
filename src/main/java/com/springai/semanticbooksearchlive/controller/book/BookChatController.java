@@ -68,7 +68,9 @@ public class BookChatController {
                     "Fantasy",
                     1865,
                     "https://placehold.co/400x600?text=Alice",
-                    true));
+                    true,
+                    java.util.Collections.emptyList(),
+                    url));
 
             return "Successfully loaded demo book: " + demoTitle;
         } catch (Exception e) {

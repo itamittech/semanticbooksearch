@@ -56,7 +56,10 @@ public class HybridSearchService {
                             metadata.containsKey("publicationYear")
                                     ? ((Number) metadata.get("publicationYear")).intValue()
                                     : 0,
-                            (String) metadata.getOrDefault("imageUrl", ""));
+                            (String) metadata.getOrDefault("imageUrl", ""),
+                            false,
+                            java.util.Collections.emptyList(),
+                            null);
 
                     // For hybrid search, we might not have a pure distance score for all items,
                     // so we default to 1.0 or calculate based on rank if needed.

@@ -22,6 +22,11 @@
     *   **Sliding Window Logic**: Implements a sliding context window to manage token limits while maintaining debate continuity.
     *   **Temporary Storage**: Uses a dedicated, ephemeral vector store session that keeps your main library clean.
 
+8.  **Intelligent Curriculum Generator**:
+    *   **Topic-to-Syllabus**: Enter any topic (e.g., "Stoicism") and the AI acts as a Professor.
+    *   **Live TOC Extraction**: Automatically extracts Table of Contents from Project Gutenberg books on-the-fly.
+    *   **Timeline UI**: Generates a week-by-week study plan with specific reading assignments from your library.
+
 ## 🛠 Tech Stack
 
 *   **Frontend**:
@@ -93,7 +98,10 @@ For rapid UI iteration, you can run the React dev server separately.
     *   `service/HybridSearchService.java`: Orchestrates Vector + Keyword search fusion.
     *   `util/RankFusionUtils.java`: Custom implementation of Reciprocal Rank Fusion (RRF).
     *   `controller/StandaloneDebateController.java`: Manages the debate API and turn-based logic.
+    *   `controller/CurriculumController.java`: Handles course generation requests.
     *   `service/debate/DebateOrchestratorService.java`: The core "referee" that manages prompts, context windows, and persona switching.
+    *   `service/CurriculumService.java`: The "Professor" agent that designs the syllabus.
+    *   `service/TOCExtractorService.java`: Intelligent scraping of Gutenberg book structures.
 
 ## 💡 Key Design Patterns implemented
 

@@ -125,7 +125,7 @@ public class BookService {
             if (book.id() == null || book.id().trim().isEmpty()) {
                 String newId = UUID.randomUUID().toString();
                 bookToAdd = new Book(newId, book.title(), book.author(), book.summary(), book.genre(),
-                        book.publicationYear(), book.imageUrl());
+                        book.publicationYear(), book.imageUrl(), false, java.util.Collections.emptyList(), null);
             }
 
             // 1. Save to DB
@@ -268,7 +268,10 @@ public class BookService {
                             metadata.containsKey("publicationYear")
                                     ? ((Number) metadata.get("publicationYear")).intValue()
                                     : 0,
-                            (String) metadata.getOrDefault("imageUrl", ""));
+                            (String) metadata.getOrDefault("imageUrl", ""),
+                            false,
+                            java.util.Collections.emptyList(),
+                            null);
 
                     double score = getScore(metadata);
                     return new SearchResult(book, score);
